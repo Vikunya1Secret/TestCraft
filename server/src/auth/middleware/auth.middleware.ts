@@ -1,24 +1,19 @@
-import { Request, Response, NextFunction } from 'express';
+import { RequestHandler } from 'express';
 import { AuthService } from '../auth.service';
 import { InvalidTokenError } from '../errors/auth';
 
-export const authMiddleware = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const authMiddleware: RequestHandler = async (req, res, next) => {
   try {
     const token = req.headers.authorization?.split(' ')[1];
-    if (!token) {
-      throw new InvalidTokenError();
-    }
-
+    
+    if (!token) throw new InvalidTokenError();
+    
     const user = await AuthService.getUserByToken(token);
-    if (!user) {
-      throw new InvalidTokenError();
-    }
+    if (!user) throw new InvalidTokenError();
 
-    req.user = user;
+    // Явное приведение типа к Express.User
+    req.user = user as Express.User;
+    
     next();
   } catch (error) {
     next(error);

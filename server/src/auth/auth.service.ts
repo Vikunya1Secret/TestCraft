@@ -42,6 +42,7 @@ export const AuthService = {
         password: true,
         role: true,
         createdAt: true,
+        updatedAt: true,
       },
     });
 
