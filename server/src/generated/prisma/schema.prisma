@@ -1,0 +1,110 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  role      UserRole @default(TEACHER)
+  createdAt DateTime @default(now())
+  tests     Test[]   @relation("TestCreator")
+}
+
+model Test {
+  id                          Int        @id @default(autoincrement())
+  creator                     User       @relation("TestCreator", fields: [creatorId], references: [id])
+  creatorId                   Int        @map("creator_id")
+  title                       String
+  description                 String?
+  testTime                    Int?
+  startDate                   DateTime?
+  endDate                     DateTime?
+  passingThreshold            Float?
+  isActive                    Boolean    @default(true)
+  successfulCompletionMessage String?
+  failureMessage              String?
+  accessLink                  String?    @unique
+  questions                   Question[]
+  attempts                    Attempt[]
+  createdAt                   DateTime   @default(now())
+
+  @@index([creatorId]) // Индекс для поиска тестов создателя
+}
+
+model Question {
+  id            Int          @id @default(autoincrement())
+  test          Test         @relation(fields: [testId], references: [id])
+  testId        Int          @map("test_id")
+  questionText  String       @map("question_text")
+  questionType  QuestionType @default(SINGLE_CHOICE)
+  points        Int
+  options       Json?
+  correctAnswer Json?        @map("correct_answer")
+  orderNumber   Int          @map("order_number")
+  answers       Answer[]
+
+  @@index([testId]) // Ускоряем поиск вопросов теста
+}
+
+model Student {
+  id             Int       @id @default(autoincrement())
+  name           String
+  email          String    @unique
+  institution    String?
+  specialization String?
+  createdAt      DateTime  @default(now())
+  attempts       Attempt[]
+
+  @@index([email]) // Ускоряем поиск по email
+}
+
+model Attempt {
+  id         Int       @id @default(autoincrement())
+  test       Test      @relation(fields: [testId], references: [id])
+  testId     Int       @map("test_id")
+  student    Student   @relation(fields: [studentId], references: [id])
+  studentId  Int       @map("student_id")
+  startTime  DateTime  @map("start_time")
+  endTime    DateTime? @map("end_time")
+  score      Float?
+  passed     Boolean?
+  resultSent Boolean   @default(false) @map("result_sent")
+  answers    Answer[]
+  createdAt  DateTime  @default(now()) @map("created_at")
+
+  @@index([testId, studentId]) // Ускоряем поиск попыток
+  @@index([createdAt]) // Для сортировки по дате
+}
+
+model Answer {
+  id            Int      @id @default(autoincrement())
+  attempt       Attempt  @relation(fields: [attemptId], references: [id])
+  attemptId     Int      @map("attempt_id")
+  question      Question @relation(fields: [questionId], references: [id])
+  questionId    Int      @map("question_id")
+  studentAnswer Json?    @map("student_answer")
+  isCorrect     Boolean? @map("is_correct")
+  pointsEarned  Float?   @map("points_earned")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  @@index([attemptId, questionId]) // Ускоряем поиск ответов
+}
+
+enum UserRole {
+  ADMIN
+  TEACHER
+}
+
+enum QuestionType {
+  SINGLE_CHOICE
+  MULTIPLE_CHOICE
+  TEXT_INPUT
+}
