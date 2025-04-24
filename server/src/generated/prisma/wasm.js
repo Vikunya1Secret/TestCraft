@@ -123,7 +123,8 @@ exports.Prisma.UserScalarFieldEnum = {
   email: 'email',
   password: 'password',
   role: 'role',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.TestScalarFieldEnum = {
@@ -139,7 +140,9 @@ exports.Prisma.TestScalarFieldEnum = {
   successfulCompletionMessage: 'successfulCompletionMessage',
   failureMessage: 'failureMessage',
   accessLink: 'accessLink',
-  createdAt: 'createdAt'
+  requiresManualReview: 'requiresManualReview',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.QuestionScalarFieldEnum = {
@@ -150,7 +153,9 @@ exports.Prisma.QuestionScalarFieldEnum = {
   points: 'points',
   options: 'options',
   correctAnswer: 'correctAnswer',
-  orderNumber: 'orderNumber'
+  orderNumber: 'orderNumber',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.StudentScalarFieldEnum = {
@@ -159,7 +164,8 @@ exports.Prisma.StudentScalarFieldEnum = {
   email: 'email',
   institution: 'institution',
   specialization: 'specialization',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.AttemptScalarFieldEnum = {
@@ -169,9 +175,12 @@ exports.Prisma.AttemptScalarFieldEnum = {
   startTime: 'startTime',
   endTime: 'endTime',
   score: 'score',
+  percentage: 'percentage',
   passed: 'passed',
   resultSent: 'resultSent',
-  createdAt: 'createdAt'
+  isReviewed: 'isReviewed',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.AnswerScalarFieldEnum = {
@@ -181,7 +190,9 @@ exports.Prisma.AnswerScalarFieldEnum = {
   studentAnswer: 'studentAnswer',
   isCorrect: 'isCorrect',
   pointsEarned: 'pointsEarned',
-  createdAt: 'createdAt'
+  teacherComment: 'teacherComment',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -217,7 +228,9 @@ exports.UserRole = exports.$Enums.UserRole = {
 exports.QuestionType = exports.$Enums.QuestionType = {
   SINGLE_CHOICE: 'SINGLE_CHOICE',
   MULTIPLE_CHOICE: 'MULTIPLE_CHOICE',
-  TEXT_INPUT: 'TEXT_INPUT'
+  TEXT_INPUT: 'TEXT_INPUT',
+  MATCHING: 'MATCHING',
+  SEQUENCE: 'SEQUENCE'
 };
 
 exports.Prisma.ModelName = {

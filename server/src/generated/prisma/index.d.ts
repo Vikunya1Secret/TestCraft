@@ -59,7 +59,9 @@ export type UserRole = (typeof UserRole)[keyof typeof UserRole]
 export const QuestionType: {
   SINGLE_CHOICE: 'SINGLE_CHOICE',
   MULTIPLE_CHOICE: 'MULTIPLE_CHOICE',
-  TEXT_INPUT: 'TEXT_INPUT'
+  TEXT_INPUT: 'TEXT_INPUT',
+  MATCHING: 'MATCHING',
+  SEQUENCE: 'SEQUENCE'
 };
 
 export type QuestionType = (typeof QuestionType)[keyof typeof QuestionType]
@@ -1544,6 +1546,7 @@ export namespace Prisma {
     password: string | null
     role: $Enums.UserRole | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1553,6 +1556,7 @@ export namespace Prisma {
     password: string | null
     role: $Enums.UserRole | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1562,6 +1566,7 @@ export namespace Prisma {
     password: number
     role: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -1581,6 +1586,7 @@ export namespace Prisma {
     password?: true
     role?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1590,6 +1596,7 @@ export namespace Prisma {
     password?: true
     role?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1599,6 +1606,7 @@ export namespace Prisma {
     password?: true
     role?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -1695,6 +1703,7 @@ export namespace Prisma {
     password: string
     role: $Enums.UserRole
     createdAt: Date
+    updatedAt: Date
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -1723,6 +1732,7 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     tests?: boolean | User$testsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -1734,6 +1744,7 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1743,6 +1754,7 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1752,9 +1764,10 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "role" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tests?: boolean | User$testsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1774,6 +1787,7 @@ export namespace Prisma {
       password: string
       role: $Enums.UserRole
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2204,6 +2218,7 @@ export namespace Prisma {
     readonly password: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'UserRole'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
+    readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
     
 
@@ -2673,7 +2688,9 @@ export namespace Prisma {
     successfulCompletionMessage: string | null
     failureMessage: string | null
     accessLink: string | null
+    requiresManualReview: boolean | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type TestMaxAggregateOutputType = {
@@ -2689,7 +2706,9 @@ export namespace Prisma {
     successfulCompletionMessage: string | null
     failureMessage: string | null
     accessLink: string | null
+    requiresManualReview: boolean | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type TestCountAggregateOutputType = {
@@ -2705,7 +2724,9 @@ export namespace Prisma {
     successfulCompletionMessage: number
     failureMessage: number
     accessLink: number
+    requiresManualReview: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -2737,7 +2758,9 @@ export namespace Prisma {
     successfulCompletionMessage?: true
     failureMessage?: true
     accessLink?: true
+    requiresManualReview?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type TestMaxAggregateInputType = {
@@ -2753,7 +2776,9 @@ export namespace Prisma {
     successfulCompletionMessage?: true
     failureMessage?: true
     accessLink?: true
+    requiresManualReview?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type TestCountAggregateInputType = {
@@ -2769,7 +2794,9 @@ export namespace Prisma {
     successfulCompletionMessage?: true
     failureMessage?: true
     accessLink?: true
+    requiresManualReview?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -2872,7 +2899,9 @@ export namespace Prisma {
     successfulCompletionMessage: string | null
     failureMessage: string | null
     accessLink: string | null
+    requiresManualReview: boolean
     createdAt: Date
+    updatedAt: Date
     _count: TestCountAggregateOutputType | null
     _avg: TestAvgAggregateOutputType | null
     _sum: TestSumAggregateOutputType | null
@@ -2907,7 +2936,9 @@ export namespace Prisma {
     successfulCompletionMessage?: boolean
     failureMessage?: boolean
     accessLink?: boolean
+    requiresManualReview?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     creator?: boolean | UserDefaultArgs<ExtArgs>
     questions?: boolean | Test$questionsArgs<ExtArgs>
     attempts?: boolean | Test$attemptsArgs<ExtArgs>
@@ -2927,7 +2958,9 @@ export namespace Prisma {
     successfulCompletionMessage?: boolean
     failureMessage?: boolean
     accessLink?: boolean
+    requiresManualReview?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     creator?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["test"]>
 
@@ -2944,7 +2977,9 @@ export namespace Prisma {
     successfulCompletionMessage?: boolean
     failureMessage?: boolean
     accessLink?: boolean
+    requiresManualReview?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     creator?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["test"]>
 
@@ -2961,10 +2996,12 @@ export namespace Prisma {
     successfulCompletionMessage?: boolean
     failureMessage?: boolean
     accessLink?: boolean
+    requiresManualReview?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type TestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "creatorId" | "title" | "description" | "testTime" | "startDate" | "endDate" | "passingThreshold" | "isActive" | "successfulCompletionMessage" | "failureMessage" | "accessLink" | "createdAt", ExtArgs["result"]["test"]>
+  export type TestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "creatorId" | "title" | "description" | "testTime" | "startDate" | "endDate" | "passingThreshold" | "isActive" | "successfulCompletionMessage" | "failureMessage" | "accessLink" | "requiresManualReview" | "createdAt" | "updatedAt", ExtArgs["result"]["test"]>
   export type TestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     creator?: boolean | UserDefaultArgs<ExtArgs>
     questions?: boolean | Test$questionsArgs<ExtArgs>
@@ -2998,7 +3035,9 @@ export namespace Prisma {
       successfulCompletionMessage: string | null
       failureMessage: string | null
       accessLink: string | null
+      requiresManualReview: boolean
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["test"]>
     composites: {}
   }
@@ -3437,7 +3476,9 @@ export namespace Prisma {
     readonly successfulCompletionMessage: FieldRef<"Test", 'String'>
     readonly failureMessage: FieldRef<"Test", 'String'>
     readonly accessLink: FieldRef<"Test", 'String'>
+    readonly requiresManualReview: FieldRef<"Test", 'Boolean'>
     readonly createdAt: FieldRef<"Test", 'DateTime'>
+    readonly updatedAt: FieldRef<"Test", 'DateTime'>
   }
     
 
@@ -3933,6 +3974,8 @@ export namespace Prisma {
     questionType: $Enums.QuestionType | null
     points: number | null
     orderNumber: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type QuestionMaxAggregateOutputType = {
@@ -3942,6 +3985,8 @@ export namespace Prisma {
     questionType: $Enums.QuestionType | null
     points: number | null
     orderNumber: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type QuestionCountAggregateOutputType = {
@@ -3953,6 +3998,8 @@ export namespace Prisma {
     options: number
     correctAnswer: number
     orderNumber: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -3978,6 +4025,8 @@ export namespace Prisma {
     questionType?: true
     points?: true
     orderNumber?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type QuestionMaxAggregateInputType = {
@@ -3987,6 +4036,8 @@ export namespace Prisma {
     questionType?: true
     points?: true
     orderNumber?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type QuestionCountAggregateInputType = {
@@ -3998,6 +4049,8 @@ export namespace Prisma {
     options?: true
     correctAnswer?: true
     orderNumber?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -4096,6 +4149,8 @@ export namespace Prisma {
     options: JsonValue | null
     correctAnswer: JsonValue | null
     orderNumber: number
+    createdAt: Date
+    updatedAt: Date
     _count: QuestionCountAggregateOutputType | null
     _avg: QuestionAvgAggregateOutputType | null
     _sum: QuestionSumAggregateOutputType | null
@@ -4126,6 +4181,8 @@ export namespace Prisma {
     options?: boolean
     correctAnswer?: boolean
     orderNumber?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     test?: boolean | TestDefaultArgs<ExtArgs>
     answers?: boolean | Question$answersArgs<ExtArgs>
     _count?: boolean | QuestionCountOutputTypeDefaultArgs<ExtArgs>
@@ -4140,6 +4197,8 @@ export namespace Prisma {
     options?: boolean
     correctAnswer?: boolean
     orderNumber?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     test?: boolean | TestDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["question"]>
 
@@ -4152,6 +4211,8 @@ export namespace Prisma {
     options?: boolean
     correctAnswer?: boolean
     orderNumber?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     test?: boolean | TestDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["question"]>
 
@@ -4164,9 +4225,11 @@ export namespace Prisma {
     options?: boolean
     correctAnswer?: boolean
     orderNumber?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type QuestionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "testId" | "questionText" | "questionType" | "points" | "options" | "correctAnswer" | "orderNumber", ExtArgs["result"]["question"]>
+  export type QuestionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "testId" | "questionText" | "questionType" | "points" | "options" | "correctAnswer" | "orderNumber" | "createdAt" | "updatedAt", ExtArgs["result"]["question"]>
   export type QuestionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     test?: boolean | TestDefaultArgs<ExtArgs>
     answers?: boolean | Question$answersArgs<ExtArgs>
@@ -4194,6 +4257,8 @@ export namespace Prisma {
       options: Prisma.JsonValue | null
       correctAnswer: Prisma.JsonValue | null
       orderNumber: number
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["question"]>
     composites: {}
   }
@@ -4627,6 +4692,8 @@ export namespace Prisma {
     readonly options: FieldRef<"Question", 'Json'>
     readonly correctAnswer: FieldRef<"Question", 'Json'>
     readonly orderNumber: FieldRef<"Question", 'Int'>
+    readonly createdAt: FieldRef<"Question", 'DateTime'>
+    readonly updatedAt: FieldRef<"Question", 'DateTime'>
   }
     
 
@@ -5092,6 +5159,7 @@ export namespace Prisma {
     institution: string | null
     specialization: string | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type StudentMaxAggregateOutputType = {
@@ -5101,6 +5169,7 @@ export namespace Prisma {
     institution: string | null
     specialization: string | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type StudentCountAggregateOutputType = {
@@ -5110,6 +5179,7 @@ export namespace Prisma {
     institution: number
     specialization: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -5129,6 +5199,7 @@ export namespace Prisma {
     institution?: true
     specialization?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type StudentMaxAggregateInputType = {
@@ -5138,6 +5209,7 @@ export namespace Prisma {
     institution?: true
     specialization?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type StudentCountAggregateInputType = {
@@ -5147,6 +5219,7 @@ export namespace Prisma {
     institution?: true
     specialization?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -5243,6 +5316,7 @@ export namespace Prisma {
     institution: string | null
     specialization: string | null
     createdAt: Date
+    updatedAt: Date
     _count: StudentCountAggregateOutputType | null
     _avg: StudentAvgAggregateOutputType | null
     _sum: StudentSumAggregateOutputType | null
@@ -5271,6 +5345,7 @@ export namespace Prisma {
     institution?: boolean
     specialization?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     attempts?: boolean | Student$attemptsArgs<ExtArgs>
     _count?: boolean | StudentCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["student"]>
@@ -5282,6 +5357,7 @@ export namespace Prisma {
     institution?: boolean
     specialization?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["student"]>
 
   export type StudentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5291,6 +5367,7 @@ export namespace Prisma {
     institution?: boolean
     specialization?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["student"]>
 
   export type StudentSelectScalar = {
@@ -5300,9 +5377,10 @@ export namespace Prisma {
     institution?: boolean
     specialization?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type StudentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "institution" | "specialization" | "createdAt", ExtArgs["result"]["student"]>
+  export type StudentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "institution" | "specialization" | "createdAt" | "updatedAt", ExtArgs["result"]["student"]>
   export type StudentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     attempts?: boolean | Student$attemptsArgs<ExtArgs>
     _count?: boolean | StudentCountOutputTypeDefaultArgs<ExtArgs>
@@ -5322,6 +5400,7 @@ export namespace Prisma {
       institution: string | null
       specialization: string | null
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["student"]>
     composites: {}
   }
@@ -5752,6 +5831,7 @@ export namespace Prisma {
     readonly institution: FieldRef<"Student", 'String'>
     readonly specialization: FieldRef<"Student", 'String'>
     readonly createdAt: FieldRef<"Student", 'DateTime'>
+    readonly updatedAt: FieldRef<"Student", 'DateTime'>
   }
     
 
@@ -6199,6 +6279,7 @@ export namespace Prisma {
     testId: number | null
     studentId: number | null
     score: number | null
+    percentage: number | null
   }
 
   export type AttemptSumAggregateOutputType = {
@@ -6206,6 +6287,7 @@ export namespace Prisma {
     testId: number | null
     studentId: number | null
     score: number | null
+    percentage: number | null
   }
 
   export type AttemptMinAggregateOutputType = {
@@ -6215,9 +6297,12 @@ export namespace Prisma {
     startTime: Date | null
     endTime: Date | null
     score: number | null
+    percentage: number | null
     passed: boolean | null
     resultSent: boolean | null
+    isReviewed: boolean | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type AttemptMaxAggregateOutputType = {
@@ -6227,9 +6312,12 @@ export namespace Prisma {
     startTime: Date | null
     endTime: Date | null
     score: number | null
+    percentage: number | null
     passed: boolean | null
     resultSent: boolean | null
+    isReviewed: boolean | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type AttemptCountAggregateOutputType = {
@@ -6239,9 +6327,12 @@ export namespace Prisma {
     startTime: number
     endTime: number
     score: number
+    percentage: number
     passed: number
     resultSent: number
+    isReviewed: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -6251,6 +6342,7 @@ export namespace Prisma {
     testId?: true
     studentId?: true
     score?: true
+    percentage?: true
   }
 
   export type AttemptSumAggregateInputType = {
@@ -6258,6 +6350,7 @@ export namespace Prisma {
     testId?: true
     studentId?: true
     score?: true
+    percentage?: true
   }
 
   export type AttemptMinAggregateInputType = {
@@ -6267,9 +6360,12 @@ export namespace Prisma {
     startTime?: true
     endTime?: true
     score?: true
+    percentage?: true
     passed?: true
     resultSent?: true
+    isReviewed?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type AttemptMaxAggregateInputType = {
@@ -6279,9 +6375,12 @@ export namespace Prisma {
     startTime?: true
     endTime?: true
     score?: true
+    percentage?: true
     passed?: true
     resultSent?: true
+    isReviewed?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type AttemptCountAggregateInputType = {
@@ -6291,9 +6390,12 @@ export namespace Prisma {
     startTime?: true
     endTime?: true
     score?: true
+    percentage?: true
     passed?: true
     resultSent?: true
+    isReviewed?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -6390,9 +6492,12 @@ export namespace Prisma {
     startTime: Date
     endTime: Date | null
     score: number | null
+    percentage: number | null
     passed: boolean | null
     resultSent: boolean
+    isReviewed: boolean
     createdAt: Date
+    updatedAt: Date
     _count: AttemptCountAggregateOutputType | null
     _avg: AttemptAvgAggregateOutputType | null
     _sum: AttemptSumAggregateOutputType | null
@@ -6421,9 +6526,12 @@ export namespace Prisma {
     startTime?: boolean
     endTime?: boolean
     score?: boolean
+    percentage?: boolean
     passed?: boolean
     resultSent?: boolean
+    isReviewed?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     test?: boolean | TestDefaultArgs<ExtArgs>
     student?: boolean | StudentDefaultArgs<ExtArgs>
     answers?: boolean | Attempt$answersArgs<ExtArgs>
@@ -6437,9 +6545,12 @@ export namespace Prisma {
     startTime?: boolean
     endTime?: boolean
     score?: boolean
+    percentage?: boolean
     passed?: boolean
     resultSent?: boolean
+    isReviewed?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     test?: boolean | TestDefaultArgs<ExtArgs>
     student?: boolean | StudentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["attempt"]>
@@ -6451,9 +6562,12 @@ export namespace Prisma {
     startTime?: boolean
     endTime?: boolean
     score?: boolean
+    percentage?: boolean
     passed?: boolean
     resultSent?: boolean
+    isReviewed?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     test?: boolean | TestDefaultArgs<ExtArgs>
     student?: boolean | StudentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["attempt"]>
@@ -6465,12 +6579,15 @@ export namespace Prisma {
     startTime?: boolean
     endTime?: boolean
     score?: boolean
+    percentage?: boolean
     passed?: boolean
     resultSent?: boolean
+    isReviewed?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type AttemptOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "testId" | "studentId" | "startTime" | "endTime" | "score" | "passed" | "resultSent" | "createdAt", ExtArgs["result"]["attempt"]>
+  export type AttemptOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "testId" | "studentId" | "startTime" | "endTime" | "score" | "percentage" | "passed" | "resultSent" | "isReviewed" | "createdAt" | "updatedAt", ExtArgs["result"]["attempt"]>
   export type AttemptInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     test?: boolean | TestDefaultArgs<ExtArgs>
     student?: boolean | StudentDefaultArgs<ExtArgs>
@@ -6500,9 +6617,12 @@ export namespace Prisma {
       startTime: Date
       endTime: Date | null
       score: number | null
+      percentage: number | null
       passed: boolean | null
       resultSent: boolean
+      isReviewed: boolean
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["attempt"]>
     composites: {}
   }
@@ -6935,9 +7055,12 @@ export namespace Prisma {
     readonly startTime: FieldRef<"Attempt", 'DateTime'>
     readonly endTime: FieldRef<"Attempt", 'DateTime'>
     readonly score: FieldRef<"Attempt", 'Float'>
+    readonly percentage: FieldRef<"Attempt", 'Float'>
     readonly passed: FieldRef<"Attempt", 'Boolean'>
     readonly resultSent: FieldRef<"Attempt", 'Boolean'>
+    readonly isReviewed: FieldRef<"Attempt", 'Boolean'>
     readonly createdAt: FieldRef<"Attempt", 'DateTime'>
+    readonly updatedAt: FieldRef<"Attempt", 'DateTime'>
   }
     
 
@@ -7408,7 +7531,9 @@ export namespace Prisma {
     questionId: number | null
     isCorrect: boolean | null
     pointsEarned: number | null
+    teacherComment: string | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type AnswerMaxAggregateOutputType = {
@@ -7417,7 +7542,9 @@ export namespace Prisma {
     questionId: number | null
     isCorrect: boolean | null
     pointsEarned: number | null
+    teacherComment: string | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type AnswerCountAggregateOutputType = {
@@ -7427,7 +7554,9 @@ export namespace Prisma {
     studentAnswer: number
     isCorrect: number
     pointsEarned: number
+    teacherComment: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -7452,7 +7581,9 @@ export namespace Prisma {
     questionId?: true
     isCorrect?: true
     pointsEarned?: true
+    teacherComment?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type AnswerMaxAggregateInputType = {
@@ -7461,7 +7592,9 @@ export namespace Prisma {
     questionId?: true
     isCorrect?: true
     pointsEarned?: true
+    teacherComment?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type AnswerCountAggregateInputType = {
@@ -7471,7 +7604,9 @@ export namespace Prisma {
     studentAnswer?: true
     isCorrect?: true
     pointsEarned?: true
+    teacherComment?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -7568,7 +7703,9 @@ export namespace Prisma {
     studentAnswer: JsonValue | null
     isCorrect: boolean | null
     pointsEarned: number | null
+    teacherComment: string | null
     createdAt: Date
+    updatedAt: Date
     _count: AnswerCountAggregateOutputType | null
     _avg: AnswerAvgAggregateOutputType | null
     _sum: AnswerSumAggregateOutputType | null
@@ -7597,7 +7734,9 @@ export namespace Prisma {
     studentAnswer?: boolean
     isCorrect?: boolean
     pointsEarned?: boolean
+    teacherComment?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     attempt?: boolean | AttemptDefaultArgs<ExtArgs>
     question?: boolean | QuestionDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["answer"]>
@@ -7609,7 +7748,9 @@ export namespace Prisma {
     studentAnswer?: boolean
     isCorrect?: boolean
     pointsEarned?: boolean
+    teacherComment?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     attempt?: boolean | AttemptDefaultArgs<ExtArgs>
     question?: boolean | QuestionDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["answer"]>
@@ -7621,7 +7762,9 @@ export namespace Prisma {
     studentAnswer?: boolean
     isCorrect?: boolean
     pointsEarned?: boolean
+    teacherComment?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     attempt?: boolean | AttemptDefaultArgs<ExtArgs>
     question?: boolean | QuestionDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["answer"]>
@@ -7633,10 +7776,12 @@ export namespace Prisma {
     studentAnswer?: boolean
     isCorrect?: boolean
     pointsEarned?: boolean
+    teacherComment?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type AnswerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "attemptId" | "questionId" | "studentAnswer" | "isCorrect" | "pointsEarned" | "createdAt", ExtArgs["result"]["answer"]>
+  export type AnswerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "attemptId" | "questionId" | "studentAnswer" | "isCorrect" | "pointsEarned" | "teacherComment" | "createdAt" | "updatedAt", ExtArgs["result"]["answer"]>
   export type AnswerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     attempt?: boolean | AttemptDefaultArgs<ExtArgs>
     question?: boolean | QuestionDefaultArgs<ExtArgs>
@@ -7663,7 +7808,9 @@ export namespace Prisma {
       studentAnswer: Prisma.JsonValue | null
       isCorrect: boolean | null
       pointsEarned: number | null
+      teacherComment: string | null
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["answer"]>
     composites: {}
   }
@@ -8095,7 +8242,9 @@ export namespace Prisma {
     readonly studentAnswer: FieldRef<"Answer", 'Json'>
     readonly isCorrect: FieldRef<"Answer", 'Boolean'>
     readonly pointsEarned: FieldRef<"Answer", 'Float'>
+    readonly teacherComment: FieldRef<"Answer", 'String'>
     readonly createdAt: FieldRef<"Answer", 'DateTime'>
+    readonly updatedAt: FieldRef<"Answer", 'DateTime'>
   }
     
 
@@ -8530,7 +8679,8 @@ export namespace Prisma {
     email: 'email',
     password: 'password',
     role: 'role',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -8549,7 +8699,9 @@ export namespace Prisma {
     successfulCompletionMessage: 'successfulCompletionMessage',
     failureMessage: 'failureMessage',
     accessLink: 'accessLink',
-    createdAt: 'createdAt'
+    requiresManualReview: 'requiresManualReview',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type TestScalarFieldEnum = (typeof TestScalarFieldEnum)[keyof typeof TestScalarFieldEnum]
@@ -8563,7 +8715,9 @@ export namespace Prisma {
     points: 'points',
     options: 'options',
     correctAnswer: 'correctAnswer',
-    orderNumber: 'orderNumber'
+    orderNumber: 'orderNumber',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type QuestionScalarFieldEnum = (typeof QuestionScalarFieldEnum)[keyof typeof QuestionScalarFieldEnum]
@@ -8575,7 +8729,8 @@ export namespace Prisma {
     email: 'email',
     institution: 'institution',
     specialization: 'specialization',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type StudentScalarFieldEnum = (typeof StudentScalarFieldEnum)[keyof typeof StudentScalarFieldEnum]
@@ -8588,9 +8743,12 @@ export namespace Prisma {
     startTime: 'startTime',
     endTime: 'endTime',
     score: 'score',
+    percentage: 'percentage',
     passed: 'passed',
     resultSent: 'resultSent',
-    createdAt: 'createdAt'
+    isReviewed: 'isReviewed',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type AttemptScalarFieldEnum = (typeof AttemptScalarFieldEnum)[keyof typeof AttemptScalarFieldEnum]
@@ -8603,7 +8761,9 @@ export namespace Prisma {
     studentAnswer: 'studentAnswer',
     isCorrect: 'isCorrect',
     pointsEarned: 'pointsEarned',
-    createdAt: 'createdAt'
+    teacherComment: 'teacherComment',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type AnswerScalarFieldEnum = (typeof AnswerScalarFieldEnum)[keyof typeof AnswerScalarFieldEnum]
@@ -8773,6 +8933,7 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
     tests?: TestListRelationFilter
   }
 
@@ -8783,6 +8944,7 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     tests?: TestOrderByRelationAggregateInput
   }
 
@@ -8796,6 +8958,7 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
     tests?: TestListRelationFilter
   }, "id" | "email">
 
@@ -8806,6 +8969,7 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -8823,6 +8987,7 @@ export namespace Prisma {
     password?: StringWithAggregatesFilter<"User"> | string
     role?: EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
   export type TestWhereInput = {
@@ -8841,7 +9006,9 @@ export namespace Prisma {
     successfulCompletionMessage?: StringNullableFilter<"Test"> | string | null
     failureMessage?: StringNullableFilter<"Test"> | string | null
     accessLink?: StringNullableFilter<"Test"> | string | null
+    requiresManualReview?: BoolFilter<"Test"> | boolean
     createdAt?: DateTimeFilter<"Test"> | Date | string
+    updatedAt?: DateTimeFilter<"Test"> | Date | string
     creator?: XOR<UserScalarRelationFilter, UserWhereInput>
     questions?: QuestionListRelationFilter
     attempts?: AttemptListRelationFilter
@@ -8860,7 +9027,9 @@ export namespace Prisma {
     successfulCompletionMessage?: SortOrderInput | SortOrder
     failureMessage?: SortOrderInput | SortOrder
     accessLink?: SortOrderInput | SortOrder
+    requiresManualReview?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     creator?: UserOrderByWithRelationInput
     questions?: QuestionOrderByRelationAggregateInput
     attempts?: AttemptOrderByRelationAggregateInput
@@ -8882,7 +9051,9 @@ export namespace Prisma {
     isActive?: BoolFilter<"Test"> | boolean
     successfulCompletionMessage?: StringNullableFilter<"Test"> | string | null
     failureMessage?: StringNullableFilter<"Test"> | string | null
+    requiresManualReview?: BoolFilter<"Test"> | boolean
     createdAt?: DateTimeFilter<"Test"> | Date | string
+    updatedAt?: DateTimeFilter<"Test"> | Date | string
     creator?: XOR<UserScalarRelationFilter, UserWhereInput>
     questions?: QuestionListRelationFilter
     attempts?: AttemptListRelationFilter
@@ -8901,7 +9072,9 @@ export namespace Prisma {
     successfulCompletionMessage?: SortOrderInput | SortOrder
     failureMessage?: SortOrderInput | SortOrder
     accessLink?: SortOrderInput | SortOrder
+    requiresManualReview?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: TestCountOrderByAggregateInput
     _avg?: TestAvgOrderByAggregateInput
     _max?: TestMaxOrderByAggregateInput
@@ -8925,7 +9098,9 @@ export namespace Prisma {
     successfulCompletionMessage?: StringNullableWithAggregatesFilter<"Test"> | string | null
     failureMessage?: StringNullableWithAggregatesFilter<"Test"> | string | null
     accessLink?: StringNullableWithAggregatesFilter<"Test"> | string | null
+    requiresManualReview?: BoolWithAggregatesFilter<"Test"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Test"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Test"> | Date | string
   }
 
   export type QuestionWhereInput = {
@@ -8940,6 +9115,8 @@ export namespace Prisma {
     options?: JsonNullableFilter<"Question">
     correctAnswer?: JsonNullableFilter<"Question">
     orderNumber?: IntFilter<"Question"> | number
+    createdAt?: DateTimeFilter<"Question"> | Date | string
+    updatedAt?: DateTimeFilter<"Question"> | Date | string
     test?: XOR<TestScalarRelationFilter, TestWhereInput>
     answers?: AnswerListRelationFilter
   }
@@ -8953,6 +9130,8 @@ export namespace Prisma {
     options?: SortOrderInput | SortOrder
     correctAnswer?: SortOrderInput | SortOrder
     orderNumber?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     test?: TestOrderByWithRelationInput
     answers?: AnswerOrderByRelationAggregateInput
   }
@@ -8969,6 +9148,8 @@ export namespace Prisma {
     options?: JsonNullableFilter<"Question">
     correctAnswer?: JsonNullableFilter<"Question">
     orderNumber?: IntFilter<"Question"> | number
+    createdAt?: DateTimeFilter<"Question"> | Date | string
+    updatedAt?: DateTimeFilter<"Question"> | Date | string
     test?: XOR<TestScalarRelationFilter, TestWhereInput>
     answers?: AnswerListRelationFilter
   }, "id">
@@ -8982,6 +9163,8 @@ export namespace Prisma {
     options?: SortOrderInput | SortOrder
     correctAnswer?: SortOrderInput | SortOrder
     orderNumber?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: QuestionCountOrderByAggregateInput
     _avg?: QuestionAvgOrderByAggregateInput
     _max?: QuestionMaxOrderByAggregateInput
@@ -9001,6 +9184,8 @@ export namespace Prisma {
     options?: JsonNullableWithAggregatesFilter<"Question">
     correctAnswer?: JsonNullableWithAggregatesFilter<"Question">
     orderNumber?: IntWithAggregatesFilter<"Question"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"Question"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Question"> | Date | string
   }
 
   export type StudentWhereInput = {
@@ -9013,6 +9198,7 @@ export namespace Prisma {
     institution?: StringNullableFilter<"Student"> | string | null
     specialization?: StringNullableFilter<"Student"> | string | null
     createdAt?: DateTimeFilter<"Student"> | Date | string
+    updatedAt?: DateTimeFilter<"Student"> | Date | string
     attempts?: AttemptListRelationFilter
   }
 
@@ -9023,6 +9209,7 @@ export namespace Prisma {
     institution?: SortOrderInput | SortOrder
     specialization?: SortOrderInput | SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     attempts?: AttemptOrderByRelationAggregateInput
   }
 
@@ -9036,6 +9223,7 @@ export namespace Prisma {
     institution?: StringNullableFilter<"Student"> | string | null
     specialization?: StringNullableFilter<"Student"> | string | null
     createdAt?: DateTimeFilter<"Student"> | Date | string
+    updatedAt?: DateTimeFilter<"Student"> | Date | string
     attempts?: AttemptListRelationFilter
   }, "id" | "email">
 
@@ -9046,6 +9234,7 @@ export namespace Prisma {
     institution?: SortOrderInput | SortOrder
     specialization?: SortOrderInput | SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: StudentCountOrderByAggregateInput
     _avg?: StudentAvgOrderByAggregateInput
     _max?: StudentMaxOrderByAggregateInput
@@ -9063,6 +9252,7 @@ export namespace Prisma {
     institution?: StringNullableWithAggregatesFilter<"Student"> | string | null
     specialization?: StringNullableWithAggregatesFilter<"Student"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Student"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Student"> | Date | string
   }
 
   export type AttemptWhereInput = {
@@ -9075,9 +9265,12 @@ export namespace Prisma {
     startTime?: DateTimeFilter<"Attempt"> | Date | string
     endTime?: DateTimeNullableFilter<"Attempt"> | Date | string | null
     score?: FloatNullableFilter<"Attempt"> | number | null
+    percentage?: FloatNullableFilter<"Attempt"> | number | null
     passed?: BoolNullableFilter<"Attempt"> | boolean | null
     resultSent?: BoolFilter<"Attempt"> | boolean
+    isReviewed?: BoolFilter<"Attempt"> | boolean
     createdAt?: DateTimeFilter<"Attempt"> | Date | string
+    updatedAt?: DateTimeFilter<"Attempt"> | Date | string
     test?: XOR<TestScalarRelationFilter, TestWhereInput>
     student?: XOR<StudentScalarRelationFilter, StudentWhereInput>
     answers?: AnswerListRelationFilter
@@ -9090,9 +9283,12 @@ export namespace Prisma {
     startTime?: SortOrder
     endTime?: SortOrderInput | SortOrder
     score?: SortOrderInput | SortOrder
+    percentage?: SortOrderInput | SortOrder
     passed?: SortOrderInput | SortOrder
     resultSent?: SortOrder
+    isReviewed?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     test?: TestOrderByWithRelationInput
     student?: StudentOrderByWithRelationInput
     answers?: AnswerOrderByRelationAggregateInput
@@ -9108,9 +9304,12 @@ export namespace Prisma {
     startTime?: DateTimeFilter<"Attempt"> | Date | string
     endTime?: DateTimeNullableFilter<"Attempt"> | Date | string | null
     score?: FloatNullableFilter<"Attempt"> | number | null
+    percentage?: FloatNullableFilter<"Attempt"> | number | null
     passed?: BoolNullableFilter<"Attempt"> | boolean | null
     resultSent?: BoolFilter<"Attempt"> | boolean
+    isReviewed?: BoolFilter<"Attempt"> | boolean
     createdAt?: DateTimeFilter<"Attempt"> | Date | string
+    updatedAt?: DateTimeFilter<"Attempt"> | Date | string
     test?: XOR<TestScalarRelationFilter, TestWhereInput>
     student?: XOR<StudentScalarRelationFilter, StudentWhereInput>
     answers?: AnswerListRelationFilter
@@ -9123,9 +9322,12 @@ export namespace Prisma {
     startTime?: SortOrder
     endTime?: SortOrderInput | SortOrder
     score?: SortOrderInput | SortOrder
+    percentage?: SortOrderInput | SortOrder
     passed?: SortOrderInput | SortOrder
     resultSent?: SortOrder
+    isReviewed?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: AttemptCountOrderByAggregateInput
     _avg?: AttemptAvgOrderByAggregateInput
     _max?: AttemptMaxOrderByAggregateInput
@@ -9143,9 +9345,12 @@ export namespace Prisma {
     startTime?: DateTimeWithAggregatesFilter<"Attempt"> | Date | string
     endTime?: DateTimeNullableWithAggregatesFilter<"Attempt"> | Date | string | null
     score?: FloatNullableWithAggregatesFilter<"Attempt"> | number | null
+    percentage?: FloatNullableWithAggregatesFilter<"Attempt"> | number | null
     passed?: BoolNullableWithAggregatesFilter<"Attempt"> | boolean | null
     resultSent?: BoolWithAggregatesFilter<"Attempt"> | boolean
+    isReviewed?: BoolWithAggregatesFilter<"Attempt"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Attempt"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Attempt"> | Date | string
   }
 
   export type AnswerWhereInput = {
@@ -9158,7 +9363,9 @@ export namespace Prisma {
     studentAnswer?: JsonNullableFilter<"Answer">
     isCorrect?: BoolNullableFilter<"Answer"> | boolean | null
     pointsEarned?: FloatNullableFilter<"Answer"> | number | null
+    teacherComment?: StringNullableFilter<"Answer"> | string | null
     createdAt?: DateTimeFilter<"Answer"> | Date | string
+    updatedAt?: DateTimeFilter<"Answer"> | Date | string
     attempt?: XOR<AttemptScalarRelationFilter, AttemptWhereInput>
     question?: XOR<QuestionScalarRelationFilter, QuestionWhereInput>
   }
@@ -9170,7 +9377,9 @@ export namespace Prisma {
     studentAnswer?: SortOrderInput | SortOrder
     isCorrect?: SortOrderInput | SortOrder
     pointsEarned?: SortOrderInput | SortOrder
+    teacherComment?: SortOrderInput | SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     attempt?: AttemptOrderByWithRelationInput
     question?: QuestionOrderByWithRelationInput
   }
@@ -9185,7 +9394,9 @@ export namespace Prisma {
     studentAnswer?: JsonNullableFilter<"Answer">
     isCorrect?: BoolNullableFilter<"Answer"> | boolean | null
     pointsEarned?: FloatNullableFilter<"Answer"> | number | null
+    teacherComment?: StringNullableFilter<"Answer"> | string | null
     createdAt?: DateTimeFilter<"Answer"> | Date | string
+    updatedAt?: DateTimeFilter<"Answer"> | Date | string
     attempt?: XOR<AttemptScalarRelationFilter, AttemptWhereInput>
     question?: XOR<QuestionScalarRelationFilter, QuestionWhereInput>
   }, "id">
@@ -9197,7 +9408,9 @@ export namespace Prisma {
     studentAnswer?: SortOrderInput | SortOrder
     isCorrect?: SortOrderInput | SortOrder
     pointsEarned?: SortOrderInput | SortOrder
+    teacherComment?: SortOrderInput | SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: AnswerCountOrderByAggregateInput
     _avg?: AnswerAvgOrderByAggregateInput
     _max?: AnswerMaxOrderByAggregateInput
@@ -9215,7 +9428,9 @@ export namespace Prisma {
     studentAnswer?: JsonNullableWithAggregatesFilter<"Answer">
     isCorrect?: BoolNullableWithAggregatesFilter<"Answer"> | boolean | null
     pointsEarned?: FloatNullableWithAggregatesFilter<"Answer"> | number | null
+    teacherComment?: StringNullableWithAggregatesFilter<"Answer"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Answer"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Answer"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -9224,6 +9439,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.UserRole
     createdAt?: Date | string
+    updatedAt?: Date | string
     tests?: TestCreateNestedManyWithoutCreatorInput
   }
 
@@ -9234,6 +9450,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.UserRole
     createdAt?: Date | string
+    updatedAt?: Date | string
     tests?: TestUncheckedCreateNestedManyWithoutCreatorInput
   }
 
@@ -9243,6 +9460,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tests?: TestUpdateManyWithoutCreatorNestedInput
   }
 
@@ -9253,6 +9471,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tests?: TestUncheckedUpdateManyWithoutCreatorNestedInput
   }
 
@@ -9263,6 +9482,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.UserRole
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type UserUpdateManyMutationInput = {
@@ -9271,6 +9491,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -9280,6 +9501,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TestCreateInput = {
@@ -9293,7 +9515,9 @@ export namespace Prisma {
     successfulCompletionMessage?: string | null
     failureMessage?: string | null
     accessLink?: string | null
+    requiresManualReview?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     creator: UserCreateNestedOneWithoutTestsInput
     questions?: QuestionCreateNestedManyWithoutTestInput
     attempts?: AttemptCreateNestedManyWithoutTestInput
@@ -9312,7 +9536,9 @@ export namespace Prisma {
     successfulCompletionMessage?: string | null
     failureMessage?: string | null
     accessLink?: string | null
+    requiresManualReview?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     questions?: QuestionUncheckedCreateNestedManyWithoutTestInput
     attempts?: AttemptUncheckedCreateNestedManyWithoutTestInput
   }
@@ -9328,7 +9554,9 @@ export namespace Prisma {
     successfulCompletionMessage?: NullableStringFieldUpdateOperationsInput | string | null
     failureMessage?: NullableStringFieldUpdateOperationsInput | string | null
     accessLink?: NullableStringFieldUpdateOperationsInput | string | null
+    requiresManualReview?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     creator?: UserUpdateOneRequiredWithoutTestsNestedInput
     questions?: QuestionUpdateManyWithoutTestNestedInput
     attempts?: AttemptUpdateManyWithoutTestNestedInput
@@ -9347,7 +9575,9 @@ export namespace Prisma {
     successfulCompletionMessage?: NullableStringFieldUpdateOperationsInput | string | null
     failureMessage?: NullableStringFieldUpdateOperationsInput | string | null
     accessLink?: NullableStringFieldUpdateOperationsInput | string | null
+    requiresManualReview?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUncheckedUpdateManyWithoutTestNestedInput
     attempts?: AttemptUncheckedUpdateManyWithoutTestNestedInput
   }
@@ -9365,7 +9595,9 @@ export namespace Prisma {
     successfulCompletionMessage?: string | null
     failureMessage?: string | null
     accessLink?: string | null
+    requiresManualReview?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type TestUpdateManyMutationInput = {
@@ -9379,7 +9611,9 @@ export namespace Prisma {
     successfulCompletionMessage?: NullableStringFieldUpdateOperationsInput | string | null
     failureMessage?: NullableStringFieldUpdateOperationsInput | string | null
     accessLink?: NullableStringFieldUpdateOperationsInput | string | null
+    requiresManualReview?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TestUncheckedUpdateManyInput = {
@@ -9395,16 +9629,20 @@ export namespace Prisma {
     successfulCompletionMessage?: NullableStringFieldUpdateOperationsInput | string | null
     failureMessage?: NullableStringFieldUpdateOperationsInput | string | null
     accessLink?: NullableStringFieldUpdateOperationsInput | string | null
+    requiresManualReview?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type QuestionCreateInput = {
     questionText: string
     questionType?: $Enums.QuestionType
-    points: number
+    points?: number
     options?: NullableJsonNullValueInput | InputJsonValue
     correctAnswer?: NullableJsonNullValueInput | InputJsonValue
-    orderNumber: number
+    orderNumber?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     test: TestCreateNestedOneWithoutQuestionsInput
     answers?: AnswerCreateNestedManyWithoutQuestionInput
   }
@@ -9414,10 +9652,12 @@ export namespace Prisma {
     testId: number
     questionText: string
     questionType?: $Enums.QuestionType
-    points: number
+    points?: number
     options?: NullableJsonNullValueInput | InputJsonValue
     correctAnswer?: NullableJsonNullValueInput | InputJsonValue
-    orderNumber: number
+    orderNumber?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     answers?: AnswerUncheckedCreateNestedManyWithoutQuestionInput
   }
 
@@ -9428,6 +9668,8 @@ export namespace Prisma {
     options?: NullableJsonNullValueInput | InputJsonValue
     correctAnswer?: NullableJsonNullValueInput | InputJsonValue
     orderNumber?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     test?: TestUpdateOneRequiredWithoutQuestionsNestedInput
     answers?: AnswerUpdateManyWithoutQuestionNestedInput
   }
@@ -9441,6 +9683,8 @@ export namespace Prisma {
     options?: NullableJsonNullValueInput | InputJsonValue
     correctAnswer?: NullableJsonNullValueInput | InputJsonValue
     orderNumber?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     answers?: AnswerUncheckedUpdateManyWithoutQuestionNestedInput
   }
 
@@ -9449,10 +9693,12 @@ export namespace Prisma {
     testId: number
     questionText: string
     questionType?: $Enums.QuestionType
-    points: number
+    points?: number
     options?: NullableJsonNullValueInput | InputJsonValue
     correctAnswer?: NullableJsonNullValueInput | InputJsonValue
-    orderNumber: number
+    orderNumber?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type QuestionUpdateManyMutationInput = {
@@ -9462,6 +9708,8 @@ export namespace Prisma {
     options?: NullableJsonNullValueInput | InputJsonValue
     correctAnswer?: NullableJsonNullValueInput | InputJsonValue
     orderNumber?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type QuestionUncheckedUpdateManyInput = {
@@ -9473,6 +9721,8 @@ export namespace Prisma {
     options?: NullableJsonNullValueInput | InputJsonValue
     correctAnswer?: NullableJsonNullValueInput | InputJsonValue
     orderNumber?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StudentCreateInput = {
@@ -9481,6 +9731,7 @@ export namespace Prisma {
     institution?: string | null
     specialization?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     attempts?: AttemptCreateNestedManyWithoutStudentInput
   }
 
@@ -9491,6 +9742,7 @@ export namespace Prisma {
     institution?: string | null
     specialization?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     attempts?: AttemptUncheckedCreateNestedManyWithoutStudentInput
   }
 
@@ -9500,6 +9752,7 @@ export namespace Prisma {
     institution?: NullableStringFieldUpdateOperationsInput | string | null
     specialization?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     attempts?: AttemptUpdateManyWithoutStudentNestedInput
   }
 
@@ -9510,6 +9763,7 @@ export namespace Prisma {
     institution?: NullableStringFieldUpdateOperationsInput | string | null
     specialization?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     attempts?: AttemptUncheckedUpdateManyWithoutStudentNestedInput
   }
 
@@ -9520,6 +9774,7 @@ export namespace Prisma {
     institution?: string | null
     specialization?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type StudentUpdateManyMutationInput = {
@@ -9528,6 +9783,7 @@ export namespace Prisma {
     institution?: NullableStringFieldUpdateOperationsInput | string | null
     specialization?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StudentUncheckedUpdateManyInput = {
@@ -9537,15 +9793,19 @@ export namespace Prisma {
     institution?: NullableStringFieldUpdateOperationsInput | string | null
     specialization?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AttemptCreateInput = {
     startTime: Date | string
     endTime?: Date | string | null
     score?: number | null
+    percentage?: number | null
     passed?: boolean | null
     resultSent?: boolean
+    isReviewed?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     test: TestCreateNestedOneWithoutAttemptsInput
     student: StudentCreateNestedOneWithoutAttemptsInput
     answers?: AnswerCreateNestedManyWithoutAttemptInput
@@ -9558,9 +9818,12 @@ export namespace Prisma {
     startTime: Date | string
     endTime?: Date | string | null
     score?: number | null
+    percentage?: number | null
     passed?: boolean | null
     resultSent?: boolean
+    isReviewed?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     answers?: AnswerUncheckedCreateNestedManyWithoutAttemptInput
   }
 
@@ -9568,9 +9831,12 @@ export namespace Prisma {
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     score?: NullableFloatFieldUpdateOperationsInput | number | null
+    percentage?: NullableFloatFieldUpdateOperationsInput | number | null
     passed?: NullableBoolFieldUpdateOperationsInput | boolean | null
     resultSent?: BoolFieldUpdateOperationsInput | boolean
+    isReviewed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     test?: TestUpdateOneRequiredWithoutAttemptsNestedInput
     student?: StudentUpdateOneRequiredWithoutAttemptsNestedInput
     answers?: AnswerUpdateManyWithoutAttemptNestedInput
@@ -9583,9 +9849,12 @@ export namespace Prisma {
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     score?: NullableFloatFieldUpdateOperationsInput | number | null
+    percentage?: NullableFloatFieldUpdateOperationsInput | number | null
     passed?: NullableBoolFieldUpdateOperationsInput | boolean | null
     resultSent?: BoolFieldUpdateOperationsInput | boolean
+    isReviewed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     answers?: AnswerUncheckedUpdateManyWithoutAttemptNestedInput
   }
 
@@ -9596,18 +9865,24 @@ export namespace Prisma {
     startTime: Date | string
     endTime?: Date | string | null
     score?: number | null
+    percentage?: number | null
     passed?: boolean | null
     resultSent?: boolean
+    isReviewed?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type AttemptUpdateManyMutationInput = {
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     score?: NullableFloatFieldUpdateOperationsInput | number | null
+    percentage?: NullableFloatFieldUpdateOperationsInput | number | null
     passed?: NullableBoolFieldUpdateOperationsInput | boolean | null
     resultSent?: BoolFieldUpdateOperationsInput | boolean
+    isReviewed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AttemptUncheckedUpdateManyInput = {
@@ -9617,16 +9892,21 @@ export namespace Prisma {
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     score?: NullableFloatFieldUpdateOperationsInput | number | null
+    percentage?: NullableFloatFieldUpdateOperationsInput | number | null
     passed?: NullableBoolFieldUpdateOperationsInput | boolean | null
     resultSent?: BoolFieldUpdateOperationsInput | boolean
+    isReviewed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AnswerCreateInput = {
     studentAnswer?: NullableJsonNullValueInput | InputJsonValue
     isCorrect?: boolean | null
     pointsEarned?: number | null
+    teacherComment?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     attempt: AttemptCreateNestedOneWithoutAnswersInput
     question: QuestionCreateNestedOneWithoutAnswersInput
   }
@@ -9638,14 +9918,18 @@ export namespace Prisma {
     studentAnswer?: NullableJsonNullValueInput | InputJsonValue
     isCorrect?: boolean | null
     pointsEarned?: number | null
+    teacherComment?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type AnswerUpdateInput = {
     studentAnswer?: NullableJsonNullValueInput | InputJsonValue
     isCorrect?: NullableBoolFieldUpdateOperationsInput | boolean | null
     pointsEarned?: NullableFloatFieldUpdateOperationsInput | number | null
+    teacherComment?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     attempt?: AttemptUpdateOneRequiredWithoutAnswersNestedInput
     question?: QuestionUpdateOneRequiredWithoutAnswersNestedInput
   }
@@ -9657,7 +9941,9 @@ export namespace Prisma {
     studentAnswer?: NullableJsonNullValueInput | InputJsonValue
     isCorrect?: NullableBoolFieldUpdateOperationsInput | boolean | null
     pointsEarned?: NullableFloatFieldUpdateOperationsInput | number | null
+    teacherComment?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AnswerCreateManyInput = {
@@ -9667,14 +9953,18 @@ export namespace Prisma {
     studentAnswer?: NullableJsonNullValueInput | InputJsonValue
     isCorrect?: boolean | null
     pointsEarned?: number | null
+    teacherComment?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type AnswerUpdateManyMutationInput = {
     studentAnswer?: NullableJsonNullValueInput | InputJsonValue
     isCorrect?: NullableBoolFieldUpdateOperationsInput | boolean | null
     pointsEarned?: NullableFloatFieldUpdateOperationsInput | number | null
+    teacherComment?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AnswerUncheckedUpdateManyInput = {
@@ -9684,7 +9974,9 @@ export namespace Prisma {
     studentAnswer?: NullableJsonNullValueInput | InputJsonValue
     isCorrect?: NullableBoolFieldUpdateOperationsInput | boolean | null
     pointsEarned?: NullableFloatFieldUpdateOperationsInput | number | null
+    teacherComment?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -9748,6 +10040,7 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
@@ -9761,6 +10054,7 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -9770,6 +10064,7 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
@@ -9930,7 +10225,9 @@ export namespace Prisma {
     successfulCompletionMessage?: SortOrder
     failureMessage?: SortOrder
     accessLink?: SortOrder
+    requiresManualReview?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type TestAvgOrderByAggregateInput = {
@@ -9953,7 +10250,9 @@ export namespace Prisma {
     successfulCompletionMessage?: SortOrder
     failureMessage?: SortOrder
     accessLink?: SortOrder
+    requiresManualReview?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type TestMinOrderByAggregateInput = {
@@ -9969,7 +10268,9 @@ export namespace Prisma {
     successfulCompletionMessage?: SortOrder
     failureMessage?: SortOrder
     accessLink?: SortOrder
+    requiresManualReview?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type TestSumOrderByAggregateInput = {
@@ -10105,6 +10406,8 @@ export namespace Prisma {
     options?: SortOrder
     correctAnswer?: SortOrder
     orderNumber?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type QuestionAvgOrderByAggregateInput = {
@@ -10121,6 +10424,8 @@ export namespace Prisma {
     questionType?: SortOrder
     points?: SortOrder
     orderNumber?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type QuestionMinOrderByAggregateInput = {
@@ -10130,6 +10435,8 @@ export namespace Prisma {
     questionType?: SortOrder
     points?: SortOrder
     orderNumber?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type QuestionSumOrderByAggregateInput = {
@@ -10182,6 +10489,7 @@ export namespace Prisma {
     institution?: SortOrder
     specialization?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type StudentAvgOrderByAggregateInput = {
@@ -10195,6 +10503,7 @@ export namespace Prisma {
     institution?: SortOrder
     specialization?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type StudentMinOrderByAggregateInput = {
@@ -10204,6 +10513,7 @@ export namespace Prisma {
     institution?: SortOrder
     specialization?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type StudentSumOrderByAggregateInput = {
@@ -10227,9 +10537,12 @@ export namespace Prisma {
     startTime?: SortOrder
     endTime?: SortOrder
     score?: SortOrder
+    percentage?: SortOrder
     passed?: SortOrder
     resultSent?: SortOrder
+    isReviewed?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type AttemptAvgOrderByAggregateInput = {
@@ -10237,6 +10550,7 @@ export namespace Prisma {
     testId?: SortOrder
     studentId?: SortOrder
     score?: SortOrder
+    percentage?: SortOrder
   }
 
   export type AttemptMaxOrderByAggregateInput = {
@@ -10246,9 +10560,12 @@ export namespace Prisma {
     startTime?: SortOrder
     endTime?: SortOrder
     score?: SortOrder
+    percentage?: SortOrder
     passed?: SortOrder
     resultSent?: SortOrder
+    isReviewed?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type AttemptMinOrderByAggregateInput = {
@@ -10258,9 +10575,12 @@ export namespace Prisma {
     startTime?: SortOrder
     endTime?: SortOrder
     score?: SortOrder
+    percentage?: SortOrder
     passed?: SortOrder
     resultSent?: SortOrder
+    isReviewed?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type AttemptSumOrderByAggregateInput = {
@@ -10268,6 +10588,7 @@ export namespace Prisma {
     testId?: SortOrder
     studentId?: SortOrder
     score?: SortOrder
+    percentage?: SortOrder
   }
 
   export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -10295,7 +10616,9 @@ export namespace Prisma {
     studentAnswer?: SortOrder
     isCorrect?: SortOrder
     pointsEarned?: SortOrder
+    teacherComment?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type AnswerAvgOrderByAggregateInput = {
@@ -10311,7 +10634,9 @@ export namespace Prisma {
     questionId?: SortOrder
     isCorrect?: SortOrder
     pointsEarned?: SortOrder
+    teacherComment?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type AnswerMinOrderByAggregateInput = {
@@ -10320,7 +10645,9 @@ export namespace Prisma {
     questionId?: SortOrder
     isCorrect?: SortOrder
     pointsEarned?: SortOrder
+    teacherComment?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type AnswerSumOrderByAggregateInput = {
@@ -11020,7 +11347,9 @@ export namespace Prisma {
     successfulCompletionMessage?: string | null
     failureMessage?: string | null
     accessLink?: string | null
+    requiresManualReview?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     questions?: QuestionCreateNestedManyWithoutTestInput
     attempts?: AttemptCreateNestedManyWithoutTestInput
   }
@@ -11037,7 +11366,9 @@ export namespace Prisma {
     successfulCompletionMessage?: string | null
     failureMessage?: string | null
     accessLink?: string | null
+    requiresManualReview?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     questions?: QuestionUncheckedCreateNestedManyWithoutTestInput
     attempts?: AttemptUncheckedCreateNestedManyWithoutTestInput
   }
@@ -11084,7 +11415,9 @@ export namespace Prisma {
     successfulCompletionMessage?: StringNullableFilter<"Test"> | string | null
     failureMessage?: StringNullableFilter<"Test"> | string | null
     accessLink?: StringNullableFilter<"Test"> | string | null
+    requiresManualReview?: BoolFilter<"Test"> | boolean
     createdAt?: DateTimeFilter<"Test"> | Date | string
+    updatedAt?: DateTimeFilter<"Test"> | Date | string
   }
 
   export type UserCreateWithoutTestsInput = {
@@ -11093,6 +11426,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.UserRole
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type UserUncheckedCreateWithoutTestsInput = {
@@ -11102,6 +11436,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.UserRole
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type UserCreateOrConnectWithoutTestsInput = {
@@ -11112,10 +11447,12 @@ export namespace Prisma {
   export type QuestionCreateWithoutTestInput = {
     questionText: string
     questionType?: $Enums.QuestionType
-    points: number
+    points?: number
     options?: NullableJsonNullValueInput | InputJsonValue
     correctAnswer?: NullableJsonNullValueInput | InputJsonValue
-    orderNumber: number
+    orderNumber?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     answers?: AnswerCreateNestedManyWithoutQuestionInput
   }
 
@@ -11123,10 +11460,12 @@ export namespace Prisma {
     id?: number
     questionText: string
     questionType?: $Enums.QuestionType
-    points: number
+    points?: number
     options?: NullableJsonNullValueInput | InputJsonValue
     correctAnswer?: NullableJsonNullValueInput | InputJsonValue
-    orderNumber: number
+    orderNumber?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     answers?: AnswerUncheckedCreateNestedManyWithoutQuestionInput
   }
 
@@ -11144,9 +11483,12 @@ export namespace Prisma {
     startTime: Date | string
     endTime?: Date | string | null
     score?: number | null
+    percentage?: number | null
     passed?: boolean | null
     resultSent?: boolean
+    isReviewed?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     student: StudentCreateNestedOneWithoutAttemptsInput
     answers?: AnswerCreateNestedManyWithoutAttemptInput
   }
@@ -11157,9 +11499,12 @@ export namespace Prisma {
     startTime: Date | string
     endTime?: Date | string | null
     score?: number | null
+    percentage?: number | null
     passed?: boolean | null
     resultSent?: boolean
+    isReviewed?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     answers?: AnswerUncheckedCreateNestedManyWithoutAttemptInput
   }
 
@@ -11190,6 +11535,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserUncheckedUpdateWithoutTestsInput = {
@@ -11199,6 +11545,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type QuestionUpsertWithWhereUniqueWithoutTestInput = {
@@ -11229,6 +11576,8 @@ export namespace Prisma {
     options?: JsonNullableFilter<"Question">
     correctAnswer?: JsonNullableFilter<"Question">
     orderNumber?: IntFilter<"Question"> | number
+    createdAt?: DateTimeFilter<"Question"> | Date | string
+    updatedAt?: DateTimeFilter<"Question"> | Date | string
   }
 
   export type AttemptUpsertWithWhereUniqueWithoutTestInput = {
@@ -11257,9 +11606,12 @@ export namespace Prisma {
     startTime?: DateTimeFilter<"Attempt"> | Date | string
     endTime?: DateTimeNullableFilter<"Attempt"> | Date | string | null
     score?: FloatNullableFilter<"Attempt"> | number | null
+    percentage?: FloatNullableFilter<"Attempt"> | number | null
     passed?: BoolNullableFilter<"Attempt"> | boolean | null
     resultSent?: BoolFilter<"Attempt"> | boolean
+    isReviewed?: BoolFilter<"Attempt"> | boolean
     createdAt?: DateTimeFilter<"Attempt"> | Date | string
+    updatedAt?: DateTimeFilter<"Attempt"> | Date | string
   }
 
   export type TestCreateWithoutQuestionsInput = {
@@ -11273,7 +11625,9 @@ export namespace Prisma {
     successfulCompletionMessage?: string | null
     failureMessage?: string | null
     accessLink?: string | null
+    requiresManualReview?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     creator: UserCreateNestedOneWithoutTestsInput
     attempts?: AttemptCreateNestedManyWithoutTestInput
   }
@@ -11291,7 +11645,9 @@ export namespace Prisma {
     successfulCompletionMessage?: string | null
     failureMessage?: string | null
     accessLink?: string | null
+    requiresManualReview?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     attempts?: AttemptUncheckedCreateNestedManyWithoutTestInput
   }
 
@@ -11304,7 +11660,9 @@ export namespace Prisma {
     studentAnswer?: NullableJsonNullValueInput | InputJsonValue
     isCorrect?: boolean | null
     pointsEarned?: number | null
+    teacherComment?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     attempt: AttemptCreateNestedOneWithoutAnswersInput
   }
 
@@ -11314,7 +11672,9 @@ export namespace Prisma {
     studentAnswer?: NullableJsonNullValueInput | InputJsonValue
     isCorrect?: boolean | null
     pointsEarned?: number | null
+    teacherComment?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type AnswerCreateOrConnectWithoutQuestionInput = {
@@ -11349,7 +11709,9 @@ export namespace Prisma {
     successfulCompletionMessage?: NullableStringFieldUpdateOperationsInput | string | null
     failureMessage?: NullableStringFieldUpdateOperationsInput | string | null
     accessLink?: NullableStringFieldUpdateOperationsInput | string | null
+    requiresManualReview?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     creator?: UserUpdateOneRequiredWithoutTestsNestedInput
     attempts?: AttemptUpdateManyWithoutTestNestedInput
   }
@@ -11367,7 +11729,9 @@ export namespace Prisma {
     successfulCompletionMessage?: NullableStringFieldUpdateOperationsInput | string | null
     failureMessage?: NullableStringFieldUpdateOperationsInput | string | null
     accessLink?: NullableStringFieldUpdateOperationsInput | string | null
+    requiresManualReview?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     attempts?: AttemptUncheckedUpdateManyWithoutTestNestedInput
   }
 
@@ -11397,16 +11761,21 @@ export namespace Prisma {
     studentAnswer?: JsonNullableFilter<"Answer">
     isCorrect?: BoolNullableFilter<"Answer"> | boolean | null
     pointsEarned?: FloatNullableFilter<"Answer"> | number | null
+    teacherComment?: StringNullableFilter<"Answer"> | string | null
     createdAt?: DateTimeFilter<"Answer"> | Date | string
+    updatedAt?: DateTimeFilter<"Answer"> | Date | string
   }
 
   export type AttemptCreateWithoutStudentInput = {
     startTime: Date | string
     endTime?: Date | string | null
     score?: number | null
+    percentage?: number | null
     passed?: boolean | null
     resultSent?: boolean
+    isReviewed?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     test: TestCreateNestedOneWithoutAttemptsInput
     answers?: AnswerCreateNestedManyWithoutAttemptInput
   }
@@ -11417,9 +11786,12 @@ export namespace Prisma {
     startTime: Date | string
     endTime?: Date | string | null
     score?: number | null
+    percentage?: number | null
     passed?: boolean | null
     resultSent?: boolean
+    isReviewed?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     answers?: AnswerUncheckedCreateNestedManyWithoutAttemptInput
   }
 
@@ -11460,7 +11832,9 @@ export namespace Prisma {
     successfulCompletionMessage?: string | null
     failureMessage?: string | null
     accessLink?: string | null
+    requiresManualReview?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     creator: UserCreateNestedOneWithoutTestsInput
     questions?: QuestionCreateNestedManyWithoutTestInput
   }
@@ -11478,7 +11852,9 @@ export namespace Prisma {
     successfulCompletionMessage?: string | null
     failureMessage?: string | null
     accessLink?: string | null
+    requiresManualReview?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     questions?: QuestionUncheckedCreateNestedManyWithoutTestInput
   }
 
@@ -11493,6 +11869,7 @@ export namespace Prisma {
     institution?: string | null
     specialization?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type StudentUncheckedCreateWithoutAttemptsInput = {
@@ -11502,6 +11879,7 @@ export namespace Prisma {
     institution?: string | null
     specialization?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type StudentCreateOrConnectWithoutAttemptsInput = {
@@ -11513,7 +11891,9 @@ export namespace Prisma {
     studentAnswer?: NullableJsonNullValueInput | InputJsonValue
     isCorrect?: boolean | null
     pointsEarned?: number | null
+    teacherComment?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     question: QuestionCreateNestedOneWithoutAnswersInput
   }
 
@@ -11523,7 +11903,9 @@ export namespace Prisma {
     studentAnswer?: NullableJsonNullValueInput | InputJsonValue
     isCorrect?: boolean | null
     pointsEarned?: number | null
+    teacherComment?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type AnswerCreateOrConnectWithoutAttemptInput = {
@@ -11558,7 +11940,9 @@ export namespace Prisma {
     successfulCompletionMessage?: NullableStringFieldUpdateOperationsInput | string | null
     failureMessage?: NullableStringFieldUpdateOperationsInput | string | null
     accessLink?: NullableStringFieldUpdateOperationsInput | string | null
+    requiresManualReview?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     creator?: UserUpdateOneRequiredWithoutTestsNestedInput
     questions?: QuestionUpdateManyWithoutTestNestedInput
   }
@@ -11576,7 +11960,9 @@ export namespace Prisma {
     successfulCompletionMessage?: NullableStringFieldUpdateOperationsInput | string | null
     failureMessage?: NullableStringFieldUpdateOperationsInput | string | null
     accessLink?: NullableStringFieldUpdateOperationsInput | string | null
+    requiresManualReview?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUncheckedUpdateManyWithoutTestNestedInput
   }
 
@@ -11597,6 +11983,7 @@ export namespace Prisma {
     institution?: NullableStringFieldUpdateOperationsInput | string | null
     specialization?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StudentUncheckedUpdateWithoutAttemptsInput = {
@@ -11606,6 +11993,7 @@ export namespace Prisma {
     institution?: NullableStringFieldUpdateOperationsInput | string | null
     specialization?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AnswerUpsertWithWhereUniqueWithoutAttemptInput = {
@@ -11628,9 +12016,12 @@ export namespace Prisma {
     startTime: Date | string
     endTime?: Date | string | null
     score?: number | null
+    percentage?: number | null
     passed?: boolean | null
     resultSent?: boolean
+    isReviewed?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     test: TestCreateNestedOneWithoutAttemptsInput
     student: StudentCreateNestedOneWithoutAttemptsInput
   }
@@ -11642,9 +12033,12 @@ export namespace Prisma {
     startTime: Date | string
     endTime?: Date | string | null
     score?: number | null
+    percentage?: number | null
     passed?: boolean | null
     resultSent?: boolean
+    isReviewed?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type AttemptCreateOrConnectWithoutAnswersInput = {
@@ -11655,10 +12049,12 @@ export namespace Prisma {
   export type QuestionCreateWithoutAnswersInput = {
     questionText: string
     questionType?: $Enums.QuestionType
-    points: number
+    points?: number
     options?: NullableJsonNullValueInput | InputJsonValue
     correctAnswer?: NullableJsonNullValueInput | InputJsonValue
-    orderNumber: number
+    orderNumber?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     test: TestCreateNestedOneWithoutQuestionsInput
   }
 
@@ -11667,10 +12063,12 @@ export namespace Prisma {
     testId: number
     questionText: string
     questionType?: $Enums.QuestionType
-    points: number
+    points?: number
     options?: NullableJsonNullValueInput | InputJsonValue
     correctAnswer?: NullableJsonNullValueInput | InputJsonValue
-    orderNumber: number
+    orderNumber?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type QuestionCreateOrConnectWithoutAnswersInput = {
@@ -11693,9 +12091,12 @@ export namespace Prisma {
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     score?: NullableFloatFieldUpdateOperationsInput | number | null
+    percentage?: NullableFloatFieldUpdateOperationsInput | number | null
     passed?: NullableBoolFieldUpdateOperationsInput | boolean | null
     resultSent?: BoolFieldUpdateOperationsInput | boolean
+    isReviewed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     test?: TestUpdateOneRequiredWithoutAttemptsNestedInput
     student?: StudentUpdateOneRequiredWithoutAttemptsNestedInput
   }
@@ -11707,9 +12108,12 @@ export namespace Prisma {
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     score?: NullableFloatFieldUpdateOperationsInput | number | null
+    percentage?: NullableFloatFieldUpdateOperationsInput | number | null
     passed?: NullableBoolFieldUpdateOperationsInput | boolean | null
     resultSent?: BoolFieldUpdateOperationsInput | boolean
+    isReviewed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type QuestionUpsertWithoutAnswersInput = {
@@ -11730,6 +12134,8 @@ export namespace Prisma {
     options?: NullableJsonNullValueInput | InputJsonValue
     correctAnswer?: NullableJsonNullValueInput | InputJsonValue
     orderNumber?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     test?: TestUpdateOneRequiredWithoutQuestionsNestedInput
   }
 
@@ -11742,6 +12148,8 @@ export namespace Prisma {
     options?: NullableJsonNullValueInput | InputJsonValue
     correctAnswer?: NullableJsonNullValueInput | InputJsonValue
     orderNumber?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TestCreateManyCreatorInput = {
@@ -11756,7 +12164,9 @@ export namespace Prisma {
     successfulCompletionMessage?: string | null
     failureMessage?: string | null
     accessLink?: string | null
+    requiresManualReview?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type TestUpdateWithoutCreatorInput = {
@@ -11770,7 +12180,9 @@ export namespace Prisma {
     successfulCompletionMessage?: NullableStringFieldUpdateOperationsInput | string | null
     failureMessage?: NullableStringFieldUpdateOperationsInput | string | null
     accessLink?: NullableStringFieldUpdateOperationsInput | string | null
+    requiresManualReview?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUpdateManyWithoutTestNestedInput
     attempts?: AttemptUpdateManyWithoutTestNestedInput
   }
@@ -11787,7 +12199,9 @@ export namespace Prisma {
     successfulCompletionMessage?: NullableStringFieldUpdateOperationsInput | string | null
     failureMessage?: NullableStringFieldUpdateOperationsInput | string | null
     accessLink?: NullableStringFieldUpdateOperationsInput | string | null
+    requiresManualReview?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUncheckedUpdateManyWithoutTestNestedInput
     attempts?: AttemptUncheckedUpdateManyWithoutTestNestedInput
   }
@@ -11804,17 +12218,21 @@ export namespace Prisma {
     successfulCompletionMessage?: NullableStringFieldUpdateOperationsInput | string | null
     failureMessage?: NullableStringFieldUpdateOperationsInput | string | null
     accessLink?: NullableStringFieldUpdateOperationsInput | string | null
+    requiresManualReview?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type QuestionCreateManyTestInput = {
     id?: number
     questionText: string
     questionType?: $Enums.QuestionType
-    points: number
+    points?: number
     options?: NullableJsonNullValueInput | InputJsonValue
     correctAnswer?: NullableJsonNullValueInput | InputJsonValue
-    orderNumber: number
+    orderNumber?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type AttemptCreateManyTestInput = {
@@ -11823,9 +12241,12 @@ export namespace Prisma {
     startTime: Date | string
     endTime?: Date | string | null
     score?: number | null
+    percentage?: number | null
     passed?: boolean | null
     resultSent?: boolean
+    isReviewed?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type QuestionUpdateWithoutTestInput = {
@@ -11835,6 +12256,8 @@ export namespace Prisma {
     options?: NullableJsonNullValueInput | InputJsonValue
     correctAnswer?: NullableJsonNullValueInput | InputJsonValue
     orderNumber?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     answers?: AnswerUpdateManyWithoutQuestionNestedInput
   }
 
@@ -11846,6 +12269,8 @@ export namespace Prisma {
     options?: NullableJsonNullValueInput | InputJsonValue
     correctAnswer?: NullableJsonNullValueInput | InputJsonValue
     orderNumber?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     answers?: AnswerUncheckedUpdateManyWithoutQuestionNestedInput
   }
 
@@ -11857,15 +12282,20 @@ export namespace Prisma {
     options?: NullableJsonNullValueInput | InputJsonValue
     correctAnswer?: NullableJsonNullValueInput | InputJsonValue
     orderNumber?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AttemptUpdateWithoutTestInput = {
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     score?: NullableFloatFieldUpdateOperationsInput | number | null
+    percentage?: NullableFloatFieldUpdateOperationsInput | number | null
     passed?: NullableBoolFieldUpdateOperationsInput | boolean | null
     resultSent?: BoolFieldUpdateOperationsInput | boolean
+    isReviewed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     student?: StudentUpdateOneRequiredWithoutAttemptsNestedInput
     answers?: AnswerUpdateManyWithoutAttemptNestedInput
   }
@@ -11876,9 +12306,12 @@ export namespace Prisma {
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     score?: NullableFloatFieldUpdateOperationsInput | number | null
+    percentage?: NullableFloatFieldUpdateOperationsInput | number | null
     passed?: NullableBoolFieldUpdateOperationsInput | boolean | null
     resultSent?: BoolFieldUpdateOperationsInput | boolean
+    isReviewed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     answers?: AnswerUncheckedUpdateManyWithoutAttemptNestedInput
   }
 
@@ -11888,9 +12321,12 @@ export namespace Prisma {
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     score?: NullableFloatFieldUpdateOperationsInput | number | null
+    percentage?: NullableFloatFieldUpdateOperationsInput | number | null
     passed?: NullableBoolFieldUpdateOperationsInput | boolean | null
     resultSent?: BoolFieldUpdateOperationsInput | boolean
+    isReviewed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AnswerCreateManyQuestionInput = {
@@ -11899,14 +12335,18 @@ export namespace Prisma {
     studentAnswer?: NullableJsonNullValueInput | InputJsonValue
     isCorrect?: boolean | null
     pointsEarned?: number | null
+    teacherComment?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type AnswerUpdateWithoutQuestionInput = {
     studentAnswer?: NullableJsonNullValueInput | InputJsonValue
     isCorrect?: NullableBoolFieldUpdateOperationsInput | boolean | null
     pointsEarned?: NullableFloatFieldUpdateOperationsInput | number | null
+    teacherComment?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     attempt?: AttemptUpdateOneRequiredWithoutAnswersNestedInput
   }
 
@@ -11916,7 +12356,9 @@ export namespace Prisma {
     studentAnswer?: NullableJsonNullValueInput | InputJsonValue
     isCorrect?: NullableBoolFieldUpdateOperationsInput | boolean | null
     pointsEarned?: NullableFloatFieldUpdateOperationsInput | number | null
+    teacherComment?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AnswerUncheckedUpdateManyWithoutQuestionInput = {
@@ -11925,7 +12367,9 @@ export namespace Prisma {
     studentAnswer?: NullableJsonNullValueInput | InputJsonValue
     isCorrect?: NullableBoolFieldUpdateOperationsInput | boolean | null
     pointsEarned?: NullableFloatFieldUpdateOperationsInput | number | null
+    teacherComment?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AttemptCreateManyStudentInput = {
@@ -11934,18 +12378,24 @@ export namespace Prisma {
     startTime: Date | string
     endTime?: Date | string | null
     score?: number | null
+    percentage?: number | null
     passed?: boolean | null
     resultSent?: boolean
+    isReviewed?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type AttemptUpdateWithoutStudentInput = {
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     score?: NullableFloatFieldUpdateOperationsInput | number | null
+    percentage?: NullableFloatFieldUpdateOperationsInput | number | null
     passed?: NullableBoolFieldUpdateOperationsInput | boolean | null
     resultSent?: BoolFieldUpdateOperationsInput | boolean
+    isReviewed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     test?: TestUpdateOneRequiredWithoutAttemptsNestedInput
     answers?: AnswerUpdateManyWithoutAttemptNestedInput
   }
@@ -11956,9 +12406,12 @@ export namespace Prisma {
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     score?: NullableFloatFieldUpdateOperationsInput | number | null
+    percentage?: NullableFloatFieldUpdateOperationsInput | number | null
     passed?: NullableBoolFieldUpdateOperationsInput | boolean | null
     resultSent?: BoolFieldUpdateOperationsInput | boolean
+    isReviewed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     answers?: AnswerUncheckedUpdateManyWithoutAttemptNestedInput
   }
 
@@ -11968,9 +12421,12 @@ export namespace Prisma {
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     score?: NullableFloatFieldUpdateOperationsInput | number | null
+    percentage?: NullableFloatFieldUpdateOperationsInput | number | null
     passed?: NullableBoolFieldUpdateOperationsInput | boolean | null
     resultSent?: BoolFieldUpdateOperationsInput | boolean
+    isReviewed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AnswerCreateManyAttemptInput = {
@@ -11979,14 +12435,18 @@ export namespace Prisma {
     studentAnswer?: NullableJsonNullValueInput | InputJsonValue
     isCorrect?: boolean | null
     pointsEarned?: number | null
+    teacherComment?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type AnswerUpdateWithoutAttemptInput = {
     studentAnswer?: NullableJsonNullValueInput | InputJsonValue
     isCorrect?: NullableBoolFieldUpdateOperationsInput | boolean | null
     pointsEarned?: NullableFloatFieldUpdateOperationsInput | number | null
+    teacherComment?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     question?: QuestionUpdateOneRequiredWithoutAnswersNestedInput
   }
 
@@ -11996,7 +12456,9 @@ export namespace Prisma {
     studentAnswer?: NullableJsonNullValueInput | InputJsonValue
     isCorrect?: NullableBoolFieldUpdateOperationsInput | boolean | null
     pointsEarned?: NullableFloatFieldUpdateOperationsInput | number | null
+    teacherComment?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AnswerUncheckedUpdateManyWithoutAttemptInput = {
@@ -12005,7 +12467,9 @@ export namespace Prisma {
     studentAnswer?: NullableJsonNullValueInput | InputJsonValue
     isCorrect?: NullableBoolFieldUpdateOperationsInput | boolean | null
     pointsEarned?: NullableFloatFieldUpdateOperationsInput | number | null
+    teacherComment?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

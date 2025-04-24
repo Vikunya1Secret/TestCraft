@@ -16,6 +16,7 @@ model User {
   role      UserRole @default(TEACHER)
   createdAt DateTime @default(now())
   tests     Test[]   @relation("TestCreator")
+  updatedAt DateTime @updatedAt
 }
 
 model Test {
@@ -24,19 +25,21 @@ model Test {
   creatorId                   Int        @map("creator_id")
   title                       String
   description                 String?
-  testTime                    Int?
-  startDate                   DateTime?
-  endDate                     DateTime?
-  passingThreshold            Float?
-  isActive                    Boolean    @default(true)
-  successfulCompletionMessage String?
-  failureMessage              String?
-  accessLink                  String?    @unique
+  testTime                    Int?       @map("test_time") // в минутах
+  startDate                   DateTime?  @map("start_date")
+  endDate                     DateTime?  @map("end_date")
+  passingThreshold            Float?     @map("passing_threshold") // в процентах или баллах
+  isActive                    Boolean    @default(true) @map("is_active")
+  successfulCompletionMessage String?    @default("Поздравляем! Вы успешно прошли тест.") @map("successful_completion_message")
+  failureMessage              String?    @default("К сожалению, вы не прошли тест. Попробуйте еще раз.") @map("failure_message")
+  accessLink                  String?    @unique @map("access_link")
+  requiresManualReview        Boolean    @default(false) @map("requires_manual_review")
   questions                   Question[]
   attempts                    Attempt[]
-  createdAt                   DateTime   @default(now())
+  createdAt                   DateTime   @default(now()) @map("created_at")
+  updatedAt                   DateTime   @updatedAt @map("updated_at")
 
-  @@index([creatorId]) // Индекс для поиска тестов создателя
+  @@index([creatorId])
 }
 
 model Question {
@@ -44,14 +47,16 @@ model Question {
   test          Test         @relation(fields: [testId], references: [id])
   testId        Int          @map("test_id")
   questionText  String       @map("question_text")
-  questionType  QuestionType @default(SINGLE_CHOICE)
-  points        Int
-  options       Json?
-  correctAnswer Json?        @map("correct_answer")
-  orderNumber   Int          @map("order_number")
+  questionType  QuestionType @default(SINGLE_CHOICE) @map("question_type")
+  points        Int          @default(1)
+  options       Json? // Для всех типов вопросов, кроме TEXT_INPUT
+  correctAnswer Json?        @map("correct_answer") // Для автоматической проверки
+  orderNumber   Int          @default(0) @map("order_number")
   answers       Answer[]
+  createdAt     DateTime     @default(now()) @map("created_at")
+  updatedAt     DateTime     @updatedAt @map("updated_at")
 
-  @@index([testId]) // Ускоряем поиск вопросов теста
+  @@index([testId])
 }
 
 model Student {
@@ -60,10 +65,11 @@ model Student {
   email          String    @unique
   institution    String?
   specialization String?
-  createdAt      DateTime  @default(now())
+  createdAt      DateTime  @default(now()) @map("created_at")
   attempts       Attempt[]
+  updatedAt      DateTime  @updatedAt @map("updated_at")
 
-  @@index([email]) // Ускоряем поиск по email
+  @@index([email])
 }
 
 model Attempt {
@@ -74,28 +80,33 @@ model Attempt {
   studentId  Int       @map("student_id")
   startTime  DateTime  @map("start_time")
   endTime    DateTime? @map("end_time")
-  score      Float?
+  score      Float? // Абсолютный балл
+  percentage Float? // Процент правильных ответов
   passed     Boolean?
   resultSent Boolean   @default(false) @map("result_sent")
+  isReviewed Boolean   @default(false) @map("is_reviewed") // Для ручной проверки
   answers    Answer[]
   createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
 
-  @@index([testId, studentId]) // Ускоряем поиск попыток
-  @@index([createdAt]) // Для сортировки по дате
+  @@index([testId, studentId])
+  @@index([createdAt])
 }
 
 model Answer {
-  id            Int      @id @default(autoincrement())
-  attempt       Attempt  @relation(fields: [attemptId], references: [id])
-  attemptId     Int      @map("attempt_id")
-  question      Question @relation(fields: [questionId], references: [id])
-  questionId    Int      @map("question_id")
-  studentAnswer Json?    @map("student_answer")
-  isCorrect     Boolean? @map("is_correct")
-  pointsEarned  Float?   @map("points_earned")
-  createdAt     DateTime @default(now()) @map("created_at")
+  id             Int      @id @default(autoincrement())
+  attempt        Attempt  @relation(fields: [attemptId], references: [id])
+  attemptId      Int      @map("attempt_id")
+  question       Question @relation(fields: [questionId], references: [id])
+  questionId     Int      @map("question_id")
+  studentAnswer  Json?    @map("student_answer")
+  isCorrect      Boolean? @map("is_correct")
+  pointsEarned   Float?   @default(0) @map("points_earned")
+  teacherComment String?  @map("teacher_comment") // Для ручной проверки
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
 
-  @@index([attemptId, questionId]) // Ускоряем поиск ответов
+  @@index([attemptId, questionId])
 }
 
 enum UserRole {
@@ -104,7 +115,9 @@ enum UserRole {
 }
 
 enum QuestionType {
-  SINGLE_CHOICE
-  MULTIPLE_CHOICE
-  TEXT_INPUT
+  SINGLE_CHOICE   @map("single_choice")
+  MULTIPLE_CHOICE @map("multiple_choice")
+  TEXT_INPUT      @map("text_input")
+  MATCHING        @map("matching")
+  SEQUENCE        @map("sequence")
 }

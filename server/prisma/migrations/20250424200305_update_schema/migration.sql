@@ -2,7 +2,7 @@
 CREATE TYPE "UserRole" AS ENUM ('ADMIN', 'TEACHER');
 
 -- CreateEnum
-CREATE TYPE "QuestionType" AS ENUM ('SINGLE_CHOICE', 'MULTIPLE_CHOICE', 'TEXT_INPUT');
+CREATE TYPE "QuestionType" AS ENUM ('single_choice', 'multiple_choice', 'text_input', 'matching', 'sequence');
 
 -- CreateTable
 CREATE TABLE "User" (
@@ -12,6 +12,7 @@ CREATE TABLE "User" (
     "password" TEXT NOT NULL,
     "role" "UserRole" NOT NULL DEFAULT 'TEACHER',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -22,15 +23,17 @@ CREATE TABLE "Test" (
     "creator_id" INTEGER NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT,
-    "testTime" INTEGER,
-    "startDate" TIMESTAMP(3),
-    "endDate" TIMESTAMP(3),
-    "passingThreshold" DOUBLE PRECISION,
-    "isActive" BOOLEAN NOT NULL DEFAULT true,
-    "successfulCompletionMessage" TEXT,
-    "failureMessage" TEXT,
-    "accessLink" TEXT,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "test_time" INTEGER,
+    "start_date" TIMESTAMP(3),
+    "end_date" TIMESTAMP(3),
+    "passing_threshold" DOUBLE PRECISION,
+    "is_active" BOOLEAN NOT NULL DEFAULT true,
+    "successful_completion_message" TEXT DEFAULT 'Поздравляем! Вы успешно прошли тест.',
+    "failure_message" TEXT DEFAULT 'К сожалению, вы не прошли тест. Попробуйте еще раз.',
+    "access_link" TEXT,
+    "requires_manual_review" BOOLEAN NOT NULL DEFAULT false,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Test_pkey" PRIMARY KEY ("id")
 );
@@ -40,11 +43,13 @@ CREATE TABLE "Question" (
     "id" SERIAL NOT NULL,
     "test_id" INTEGER NOT NULL,
     "question_text" TEXT NOT NULL,
-    "questionType" "QuestionType" NOT NULL DEFAULT 'SINGLE_CHOICE',
-    "points" INTEGER NOT NULL,
+    "question_type" "QuestionType" NOT NULL DEFAULT 'single_choice',
+    "points" INTEGER NOT NULL DEFAULT 1,
     "options" JSONB,
     "correct_answer" JSONB,
-    "order_number" INTEGER NOT NULL,
+    "order_number" INTEGER NOT NULL DEFAULT 0,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Question_pkey" PRIMARY KEY ("id")
 );
@@ -56,7 +61,8 @@ CREATE TABLE "Student" (
     "email" TEXT NOT NULL,
     "institution" TEXT,
     "specialization" TEXT,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Student_pkey" PRIMARY KEY ("id")
 );
@@ -69,9 +75,12 @@ CREATE TABLE "Attempt" (
     "start_time" TIMESTAMP(3) NOT NULL,
     "end_time" TIMESTAMP(3),
     "score" DOUBLE PRECISION,
+    "percentage" DOUBLE PRECISION,
     "passed" BOOLEAN,
     "result_sent" BOOLEAN NOT NULL DEFAULT false,
+    "is_reviewed" BOOLEAN NOT NULL DEFAULT false,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Attempt_pkey" PRIMARY KEY ("id")
 );
@@ -83,8 +92,10 @@ CREATE TABLE "Answer" (
     "question_id" INTEGER NOT NULL,
     "student_answer" JSONB,
     "is_correct" BOOLEAN,
-    "points_earned" DOUBLE PRECISION,
+    "points_earned" DOUBLE PRECISION DEFAULT 0,
+    "teacher_comment" TEXT,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Answer_pkey" PRIMARY KEY ("id")
 );
@@ -93,7 +104,7 @@ CREATE TABLE "Answer" (
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Test_accessLink_key" ON "Test"("accessLink");
+CREATE UNIQUE INDEX "Test_access_link_key" ON "Test"("access_link");
 
 -- CreateIndex
 CREATE INDEX "Test_creator_id_idx" ON "Test"("creator_id");
