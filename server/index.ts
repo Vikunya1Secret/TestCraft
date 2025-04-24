@@ -3,6 +3,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import 'dotenv/config';
 import authRouter from './src/auth/auth.router';
+import testsRouter from './src/tests/tests.router';
 import { errorMiddleware } from './src/auth/middleware/error.middleware';
 
 // Проверка обязательных переменных окружения
@@ -23,6 +24,7 @@ app.use(cors({
 
 // Routes
 app.use('/auth', authRouter);
+app.use('/tests', testsRouter);
 
 // 404 Handler
 app.use((req, res) => {
