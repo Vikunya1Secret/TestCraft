@@ -26,7 +26,8 @@ export const getQuestionsByTestId = async (req, res) => {
 // Создание нового вопроса
 export const createQuestion = async (req, res) => {
   try {
-    const { questionText, questionType, options, correctAnswer, points, explanation } = req.body;
+    const { questionText, questionType, options, correctAnswer, points, explanation, settings } = req.body;
+    console.log("📦 Полученные вопросы:", req.body);
     const testId = req.params.testId;
 
     // Проверка существования теста
@@ -53,7 +54,8 @@ export const createQuestion = async (req, res) => {
       correctAnswer,
       points: points || 1,
       orderIndex: questionCount,
-      explanation
+      explanation,
+      settings
     });
 
     res.status(201).json(question);
@@ -68,7 +70,7 @@ export const createMultipleQuestions = async (req, res) => {
   try {
     const questionsData = req.body; // Ожидаем массив объектов с вопросами
     const testId = req.params.testId;
-
+    console.log(questionsData)
     // Проверка существования теста
     const test = await Test.findById(testId);
     if (!test) {
@@ -88,7 +90,7 @@ export const createMultipleQuestions = async (req, res) => {
       test: testId,
       questionText: q.questionText,
       questionType: q.questionType,
-      options: q.options || [],
+      options: (q.questionType === "textInput" ? [] : q.options) || [], // questionType: "textInput"
       correctAnswer: q.correctAnswer,
       points: q.points || 1,
       orderIndex: existingCount + index, // Учитываем уже существующие вопросы
@@ -99,7 +101,7 @@ export const createMultipleQuestions = async (req, res) => {
     const insertedQuestions = await Question.insertMany(preparedQuestions);
 
     // Отправка ответа с добавленными вопросами
-    res.status(201).json(insertedQuestions);
+    res.status(201).json(questionsData);
   } catch (error) {
     console.error('Ошибка при массовом создании вопросов:', error);
     res.status(500).json({ message: 'Ошибка сервера' });

@@ -1,6 +1,29 @@
 import React from "react";
 
-export const QuestionListSection = ({ answerOptions, title }) => {
+export const QuestionListSection = ({ answerOptions, title, questionId, setAnswers, isChecking = false, answer = null }) => {
+
+  const handleCheckboxChange = (optionId, checked) => {
+    setAnswers((prev) => {
+      return prev.map((el) => {
+        if (el.question === questionId) {
+          let newSelected;
+          if (checked) {
+            // Add option
+            newSelected = [...el.selectedOptions, optionId];
+          } else {
+            // Remove option
+            newSelected = el.selectedOptions.filter((id) => id !== optionId);
+          }
+          return {
+            ...el,
+            selectedOptions: newSelected
+          };
+        }
+        return el;
+      });
+    });
+  };
+
   return (
     <div className="w-full max-w-[702px] mx-auto">
       <div className="rounded-[30px] shadow-[0px_4px_10px_0px_rgba(204,216,233,0.5)] bg-white px-5 pb-6 py-[30px]">
@@ -13,14 +36,17 @@ export const QuestionListSection = ({ answerOptions, title }) => {
         <div className="space-y-4">
           {answerOptions.map((option, index) => (
             <label
-              key={index}
-              htmlFor={`option-${index}`}
+              key={option.id}
+              htmlFor={`option-${index + questionId}`}
               className="flex items-center h-11 rounded-[25px] border border-solid border-[#d2e0ff] px-3.5 cursor-pointer"
             >
               <input
+                disabled={isChecking}
                 type="checkbox"
-                id={`option-${index}`}
+                defaultChecked={isChecking && answer?.includes(option.id)}
+                id={`option-${index + questionId}`}
                 className="peer hidden"
+                onChange={(e) => handleCheckboxChange(option.id, e.target.checked)}
               />
               <div
                 className="

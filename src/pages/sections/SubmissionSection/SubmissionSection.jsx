@@ -14,7 +14,13 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-export const SubmissionSection = ({ answerOptions, title }) => {
+export const SubmissionSection = ({
+  answerOptions,
+  title,
+  questionId,
+  setAnswers,
+  isChecking = false
+}) => {
   const [items, setItems] = useState(answerOptions);
 
   const sensors = useSensors(
@@ -25,12 +31,29 @@ export const SubmissionSection = ({ answerOptions, title }) => {
     })
   );
 
+  console.log(answerOptions)
+
   function handleDragEnd(event) {
     const { active, over } = event;
     if (active.id !== over?.id) {
       setItems((items) => {
-        const oldIndex = items.findIndex((i) => i._id === active.id);
-        const newIndex = items.findIndex((i) => i._id === over.id);
+        const oldIndex = items.findIndex((i) => i.id === active.id);
+        const newIndex = items.findIndex((i) => i.id === over.id);
+        const stringified = arrayMove(items, oldIndex, newIndex)
+          .map((item) => item.text.trim())
+          .join(" ");
+        setAnswers((prev) =>
+          [...prev].map((el) => {
+            if (questionId === el.question) {
+              return {
+                ...el,
+                textAnswer: stringified,
+              };
+            } else {
+              return { ...el };
+            }
+          })
+        );
         return arrayMove(items, oldIndex, newIndex);
       });
     }
@@ -49,12 +72,17 @@ export const SubmissionSection = ({ answerOptions, title }) => {
           onDragEnd={handleDragEnd}
         >
           <SortableContext
-            items={items.map((item) => item._id)}
+            items={items.map((item) => item.id)}
             strategy={verticalListSortingStrategy}
+            disabled={isChecking}
           >
             <div className="flex flex-col gap-[16px]">
               {items.map((option) => (
-                <SortableItem key={option._id} id={option._id} text={option.text} />
+                <SortableItem
+                  key={option.id}
+                  id={option.id}
+                  text={option.text}
+                />
               ))}
             </div>
           </SortableContext>

@@ -1,23 +1,26 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Plus } from "lucide-react";
 import Card1 from "../components/Card1";
 import Card2 from "../components/Card2";
 import Card3 from "../components/Card3";
 import Card4 from "../components/Card4";
 import Card5 from "../components/Card5";
-import createTest, { createQuestionsToTest } from "../services/test.service";
+import createTest, { createQuestionsToTest, getTest, updateTest } from "../services/test.service";
 
 import mapCardTypeToQuestionType, {
   answerGenerator,
+  mapQuestionTypeToCardType,
+  minutesToTimeString,
   timeStringToMinutes,
 } from "../lib/util";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
-const CreateTest = () => {
+const EditTest = () => {
+    const [editTest, setEditTest] = useState();
   const [questions, setQuestions] = useState([{ id: 0, type: "Card1" }]);
   const [nextId, setNextId] = useState(1);
   const [showCardSelection, setShowCardSelection] = useState(false);
@@ -32,10 +35,10 @@ const CreateTest = () => {
     testTitle: "",
     questions: {},
   });
+    const { id } = useParams();
+    const [loading, setLoading] = useState(false);
 
-  const [loading, setLoading] = useState(false);
-
-  const navigate = useNavigate();
+    const navigate = useNavigate()
 
   // Refs for each card to get data
   const cardRefs = useRef({});
@@ -52,6 +55,41 @@ const CreateTest = () => {
     setShowCardSelection(false);
   };
 
+
+async function getTestData() {
+  const getDataEditTest = await getTest(id);
+  
+  setEditTest(getDataEditTest)
+  const updatedQuestions = getDataEditTest.questions.map((q, index) => ({
+    id: index,
+    type: mapQuestionTypeToCardType(q.questionType),
+    editTask:{ ...q, settings:getDataEditTest.settings }
+  }));
+
+  setQuestions(updatedQuestions);
+  setEditTest(getDataEditTest);
+}
+
+  useEffect(()=>{
+    getTestData()
+  }, [id]);
+  useEffect(()=>{
+    if(editTest){
+    setSuccessMessage(editTest.successMessage || "");
+    setFailureMessage(editTest.failureMessage || "");
+    setTestInstructions(editTest.description);
+    setTestTitle(editTest.title);
+    setPassingScore(editTest.passingScore);
+    console.log(editTest)
+    setManualCheck(editTest.manualCheck);
+    setTimeLimit(minutesToTimeString(editTest.timeLimit))
+
+    //const time = formatTime(editTest.timeLimit)
+  //    console.log(time)
+}  
+}, [editTest]);
+
+
   // Function to remove a question
   const removeQuestion = (id) => {
     setQuestions(questions.filter((question) => question.id !== id));
@@ -61,6 +99,7 @@ const CreateTest = () => {
     delete updatedRefs[id];
     cardRefs.current = updatedRefs;
   };
+
 
   // Format time input
   const formatTime = (val) => {
@@ -76,6 +115,7 @@ const CreateTest = () => {
   // Handle time input change
   const handleTimeChange = (e) => {
     const formatted = formatTime(e.target.value);
+    console.log(formatted)
     setTimeLimit(formatted);
   };
 
@@ -121,7 +161,7 @@ const CreateTest = () => {
         }
       } else if (data.type === "Card3") {
         // Check if any answer is empty
-     
+       
         const emptyAnswers = data.options.some((opt) => !opt.text.trim());
         if (emptyAnswers) {
           questionErrors.push("Пожалуйста, заполните все правильные ответы");
@@ -166,63 +206,45 @@ const CreateTest = () => {
         }
       }
       return;
-  }
-
-const questionsData = questions
-      .map((question) => {
-        if (!cardRefs.current[question.id]) return null;
-        const data = cardRefs.current[question.id].getData()
-      
-        return {
-          questionText: data.questionText,
-          questionType: mapCardTypeToQuestionType(data.type), // we'll define this below
-          options: data.options || data.pairs || data.steps || [],
-          correctAnswer: answerGenerator(
-            data.type,
-            data.options || data.options || data.pairs || data.steps
-          ),
-          points: data.points || 1,
-          explanation: data.explanation || "",
-          settings:data?.settings || {
-          caseSensitive:false,
-          exactMatch:false,
-        },
-        };
-      }).filter(Boolean)
-
-    const testData = {
+    }   
+      const questionsData = questions
+          .map((question, index) => {
+            if (!cardRefs.current[question.id]) return null;
+            const data = cardRefs.current[question.id].getData();
+            return {
+              id:index,
+              questionText: data.questionText,
+              questionType: mapCardTypeToQuestionType(data.type), // we'll define this below
+              options: data.options || data.pairs || data.steps || [],
+              correctAnswer: answerGenerator(
+                data.type,
+                data.options || data.options || data.pairs || data.steps
+              ),
+              points: data.points || 1,
+              explanation: data.explanation || "",
+            };
+          })
+          .filter(Boolean);
+const testData = {
       title: testTitle,
       instructions: testInstructions,
       successMessage,
       failureMessage,
       manualCheck,
       passingScore: passingScore ? Number.parseInt(passingScore) : 0,
-      timeLimit,
+      timeLimit: timeLimit
+        ? timeStringToMinutes(timeLimit)
+        : 0,
       questions: questionsData
     };
-
-    setLoading(true);
-    
-
-    createTest({
-      title: testData.title,
-      description: testData.instructions,
-      passingScore: testData.passingScore,
-      failureMessage: (failureMessage?.trim())|| "К сожалению, вы не прошли тест, попробуйте в следующий раз",
-      successMessage:(successMessage?.trim()) || "Поздравляю, вы прошли тест",
-      manualCheck: manualCheck,
-      timeLimit: testData.timeLimit
-        ? timeStringToMinutes(testData.timeLimit)
-        : 0,
-    }).then((d) => {
-      createQuestionsToTest(d._id, questionsData).then((h) => {
-       setLoading(false);
-        navigate("/test-management");
-      });
-    });
-
-
-
+          // console.log(testData)
+          setLoading(true)
+          updateTest(id, testData).then((dart) => {
+            setLoading(false)
+            if(dart.status === 200) {
+              navigate("/test-management")
+            }
+          })
   };
 
   // Toggle card selection modal
@@ -272,8 +294,7 @@ const questionsData = questions
             {/* Question Cards */}
             {questions.map((question) => {
               const { id, type } = question;
-
-              // Set up props for each card type (without the key)
+              // Set up props for each card typ e (without the key)
               const cardProps = {
                 ref: (el) => {
                   if (el) {
@@ -288,15 +309,15 @@ const questionsData = questions
               // Render the appropriate card component with key passed directly
               switch (type) {
                 case "Card1":
-                  return <Card1 key={id} {...cardProps} />;
+                  return <Card1 key={id} {...cardProps} editTask={question.editTask}/>;
                 case "Card2":
-                  return <Card2 key={id} {...cardProps} />;
+                  return <Card2 key={id} {...cardProps} editTask={question.editTask}/>;
                 case "Card3":
-                  return <Card3 key={id} {...cardProps} />;
+                  return <Card3 key={id} {...cardProps} editTask={question.editTask}/>;
                 case "Card4":
-                  return <Card4 key={id} {...cardProps} />;
+                  return <Card4 key={id} {...cardProps} editTask={question.editTask}/>;
                 case "Card5":
-                  return <Card5 key={id} {...cardProps} />;
+                  return <Card5 key={id} {...cardProps} editTask={question.editTask}/>;
                 default:
                   return null;
               }
@@ -326,7 +347,7 @@ const questionsData = questions
               disabled={loading}
               className="w-full disabled:opacity-50 disabled:cursor-not-allowed bg-[#F68D88] cursor-pointer h-[52px] text-white rounded-full text-[18px] py-3 font-bold"
             >
-              Сохранить тест
+              Сохранить изменения
             </button>
           </div>
 
@@ -466,4 +487,4 @@ const questionsData = questions
   );
 };
 
-export default CreateTest;
+export default EditTest;

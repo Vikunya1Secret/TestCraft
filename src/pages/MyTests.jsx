@@ -14,6 +14,7 @@ export default function TestManagementPage() {
     })
   }, [])
 
+
   return (
     <div className="min-h-screen bg-[#eff5ff]">
       {/* Header */}
@@ -25,8 +26,8 @@ export default function TestManagementPage() {
         <section className="mb-10  max-w-[1152px] mx-auto">
           <h2 className="text-[#3d568f] text-[24px] font-bold  mb-10">Недавние тесты</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {tests.map((item) => (
-              <TestCard test={item} key={`recent-${item}`} />
+            {tests.slice(0,4).map((item) => (
+              <TestCard setTests={setTests} test={item} key={`recent-${item._id}`} />
             ))}
           </div>
         </section>
@@ -39,7 +40,7 @@ export default function TestManagementPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <AddTestCard />
             {tests.map((item) => (
-              <TestCard test={item} key={`all-${item}`} />
+              <TestCard setTests={setTests} test={item} key={`all-${item._id}`} />
             ))}
           </div>
         </section>

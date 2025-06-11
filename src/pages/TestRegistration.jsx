@@ -28,7 +28,7 @@ export default function TestRegistrationForm() {
     // console.log(response)
     if (response?.startTime) {
       navigate("/start-test", {
-        state: test,
+        state: {...test, start: response.startTime, result_id: response._id},
       })
     }
   }

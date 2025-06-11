@@ -6,9 +6,7 @@ const answerSchema = new mongoose.Schema({
     ref: 'Question',
     required: true
   },
-  selectedOptions: [{
-    type: String
-  }],
+  selectedOptions: [mongoose.Schema.Types.Mixed],
   textAnswer: {
     type: String
   },

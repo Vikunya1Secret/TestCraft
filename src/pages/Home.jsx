@@ -43,12 +43,12 @@ function HomePage() {
               <br />
               Лучшие результаты.
             </h1>
-            <Link
-              to="/login"
-              className="inline-block bg-[#f68d88] text-white px-8 py-3 rounded-full hover:bg-[#ecbdbb] transition-colors"
+            <button
+               onClick={redirector}
+              className="inline-block cursor-pointer bg-[#f68d88] text-white px-8 py-3 rounded-full hover:bg-[#ecbdbb] transition-colors"
             >
               Войти
-            </Link>
+            </button>
           </div>
           <div className="md:w-1/2 flex justify-center">
             <img

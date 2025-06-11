@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/user.model.js';
+import transporter from '../mailer.js';
 
 // Генерация JWT токена
 const generateToken = (id) => {
@@ -64,6 +65,7 @@ export const login = async (req, res) => {
     }
 
     const token = generateToken(user._id);
+    
 
     res.json({
       _id: user._id,

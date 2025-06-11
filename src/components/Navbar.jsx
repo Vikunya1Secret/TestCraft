@@ -23,12 +23,12 @@ const Navbar = () => {
         <div className="flex items-center space-x-8">
           <div className="flex items-center">
             <div className="w-10 h-10 rounded-md flex items-center justify-center">
-              <img className="w-[50px] h-[50px]" src="./logo.png" alt="" />
+              <img className="w-[50px] h-[50px]" src="/logo.png" alt="" />
             </div>
           </div>
           <nav className="flex space-x-8">
             <Link
-              href="/test-management"
+              to="/test-management"
               className="text-[#3d568f] text-[20px] font-bold py-5"
             >
               Мои тесты
@@ -45,7 +45,7 @@ const Navbar = () => {
           <div onClick={handleOpen} className="relative">
             <img
               className="h-10 w-10 cursor-pointer"
-              src="./test/profile.png"
+              src="/test/profile.png"
               alt=""
             />
             {open && <div className="absolute w-[186px] -translate-x-16 px-5 py-2.5 rounded-4xl bg-white shadow top-12">

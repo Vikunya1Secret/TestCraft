@@ -25,6 +25,10 @@ const questionSchema = new mongoose.Schema({
     default: 1,
     min: 0
   },
+    settings:{
+    caseSensitive: { type: Boolean, required: false },
+    exactMatch: { type: Boolean, required: false }
+},
   orderIndex: {
     type: Number,
     default: 0
