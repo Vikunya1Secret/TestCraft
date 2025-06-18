@@ -20,7 +20,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
 const EditTest = () => {
-    const [editTest, setEditTest] = useState();
+  const [editTest, setEditTest] = useState();
   const [questions, setQuestions] = useState([{ id: 0, type: "Card1" }]);
   const [nextId, setNextId] = useState(1);
   const [showCardSelection, setShowCardSelection] = useState(false);
@@ -81,7 +81,7 @@ async function getTestData() {
     setTestTitle(editTest.title);
     setPassingScore(editTest.passingScore);
     console.log(editTest)
-    setManualCheck(editTest.manualCheck);
+    setManualCheck(!editTest.manualCheck);
     setTimeLimit(minutesToTimeString(editTest.timeLimit))
 
     //const time = formatTime(editTest.timeLimit)
